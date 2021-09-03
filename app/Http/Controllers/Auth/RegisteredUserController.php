@@ -35,20 +35,25 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'surname' => ['required','string','max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', Rules\Password::defaults()],
+            'street_address' => ['required','string','max:255',]
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+            'name' => strip_tags($request->name),
+            'email' => strip_tags($request->email),
             'password' => Hash::make($request->password),
+            'surname' => strip_tags($request->surname),
+            'street_address' => strip_tags($request->street_address)
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
+        $user->notify( new \App\Notifications\Registered());
         return redirect(RouteServiceProvider::HOME);
     }
 }

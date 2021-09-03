@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'surname',
+        'street_address'
     ];
 
     /**
@@ -33,12 +35,15 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+
+    public function tobaccoShops()
+    {
+        return $this->hasMany(TobaccoShop::class);
+    }
+
+    public function employeeToTobaccoShops()
+    {
+        return $this->belongsToMany(TobaccoShop::class, 'employees','user_id','tobaccoShop_id');
+    }
 }
+     

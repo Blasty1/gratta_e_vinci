@@ -1,0 +1,80 @@
+@import './../setUpProject';
+html , body {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+#app{
+
+    background-color: $blue;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+#buttonDipendente, #buttonImprenditore{
+
+    height: 45vh;
+    width: 90%;
+    border: 1px solid $white;
+    font-family: $font-title;
+    color: white;
+    font-size: 2em;
+    list-style: none;
+    padding-left: 1em;
+    padding-right: 1em;
+    .title{
+        text-align: center;
+        border-bottom: 1px solid $white;
+        padding : 0.2em;
+
+
+    }
+    li {
+        overflow: auto;
+        max-height: 4vh;
+        a {
+            color: white;
+            text-decoration: none;
+        }
+    }
+}
+#buttonImprenditore{
+    background-color: $blu_dark;
+}
+#buttonDipendente{
+    background-color: $yellow_dark;
+    opacity: 0.9;
+    color: $black;
+    .title {
+         border-color: $black !important;
+    }
+}
+#navbar{
+    a { color : $yellow_dark; }
+}
+.add_shops{
+    border-top : 1px solid $white;
+    border-bottom: 1px solid $white;
+    text-align: center;
+    &:hover{
+        background-color: $white;
+        color : $black;
+    }
+}
+@media  (max-width: 770.98px) and (max-height : 900px) { 
+    .fixed-top {
+        top :43.2%;
+    }
+
+}
+
+// Large devices (desktops, less than 1200px)
+@media (min-width: 800.98px) { 
+    #buttonDipendente, #buttonImprenditore{
+
+        height: 55vh;
+    }
+}

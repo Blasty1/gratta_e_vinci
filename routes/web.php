@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TobaccoShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if( \Auth::user() ) return redirect(route('dashboard'));
+    return view('home');
 });
+Route::get('/google/redirect', [App\Http\Controllers\LoginGoogleController::class,'store']);
+Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
+Route::get('/contabilizza/{tobaccoShop}',[TobaccoShopController::class,'show'])->middleware('ownerOrEmployee');
 require __DIR__.'/auth.php';

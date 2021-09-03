@@ -1,17 +1,20 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
-                </div>
-            </div>
+@extends('layouts.app')
+@section('body')
+     <link rel="stylesheet" href="./css/main/dashboard.css">
+     <nav id="navbar" class="fixed-top">
+ì            <ul class="nav justify-content-center mt-2" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active "  href="#home">{{ $user->name }}</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link"  href="/signIn" role="tab">Impostazioni</a>
+                </li>
+            </ul>
+</nav>
+    <div class="container-fluid h-100">
+        <div class="row h-100 align-items-center justify-content-center">
+        <div class="col-md-6 "><tobacco-shops :tobacco_shops="{{ json_encode($user->tobaccoShops)}}"></tobacco-shops></div>
+        <div class="col-md-6 "><employees :tobacco_shops="{{json_encode($user->employeeToTobaccoShops) }}"></employees></div>
         </div>
     </div>
-</x-app-layout>
+@endsection
