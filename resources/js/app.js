@@ -7,6 +7,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue').default;
+import moment from 'moment';
 
 /**
  * The following block of code may be used to automatically register your
@@ -29,3 +30,5 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 const app = new Vue({
     el: '#app',
 });
+
+Vue.prototype.moment = moment;

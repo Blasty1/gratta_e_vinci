@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,7 +21,7 @@ class TobaccoShop extends Model
 
     public function scratchAndWins()
     {
-        return $this->belongsToMany(ScratchAndWin::class)->withPivot('user_id','quantity');
+        return $this->belongsToMany(ScratchAndWin::class,'scratch_and_win_tobacco_shop','tobaccoShop_id','scratchAndWin_id')->withPivot('employee_id','quantity','id','created_at')->wherePivot('created_at','>=',Carbon::today());
     }
     public function employees($id=null)
     {

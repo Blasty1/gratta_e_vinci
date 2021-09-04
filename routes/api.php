@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TobaccoShopController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,6 @@ Route::get('/google/login/url', [App\Http\Controllers\LoginGoogleController::cla
 
 Route::post('/users',[\App\Http\Controllers\Auth\RegisteredUserController::class,'store']);
 Route::post('/password/reset', [App\Http\Controllers\Auth\PasswordResetLinkController::class,'store']);
+Route::get("/contabilizza/{tobaccoShop}/scratchAndWins" , [App\Http\Controllers\ScratchAndWinTobaccoShopController::class,'show'])->middleware(['auth:sanctum', 'ownerOrEmployee']);
+Route::delete("/contabilizza/{tobaccoShop}/scratchAndWins/{scratchAndWinTobaccoShop}/delete" , [App\Http\Controllers\ScratchAndWinTobaccoShopController::class,'destroy'])->middleware(['auth:sanctum', 'owner']);
+Route::post("/contabilizza/{tobaccoShop}/scratchAndWins/store" , [App\Http\Controllers\ScratchAndWinTobaccoShopController::class,'store'])->middleware(['auth:sanctum', 'ownerOrEmployee']);

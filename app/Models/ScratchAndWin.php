@@ -11,4 +11,9 @@ class ScratchAndWin extends Model
     protected $fillable = [
         'prize' , 'name' , 'token'
     ];
+    public function employees()
+    {
+        return $this->belongsToMany(User::class, 'employees','tobaccoShop_id','user_id');
+
+    }
 }

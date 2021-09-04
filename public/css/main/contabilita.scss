@@ -1,0 +1,89 @@
+@import './../setUpProject';
+html , body {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+#app{
+
+    background-color: $blue;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+#main_contabilità{
+    height: 80%;
+    width: 100%;
+    background-color: $blu_dark;
+    border: 3px solid $yellow_dark;
+    position: relative;
+}
+#contabilita_table{
+    ::placeholder{
+        color: $white ;
+    }
+    color : $white;
+    thead{
+        th { border-top : 0; }
+    }
+    tr, thead{
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+        text-align: center;
+    }
+    td{
+        word-break: break-all;
+        text-align: center;
+    }
+    tbody{
+        display: block;
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-height: 62vh;
+        
+    }
+}
+.itemsExceptFirst{
+    opacity: 0.6;
+}
+.row_submit{
+    button , input{
+        height: 8vh;
+        background-color: #00509d;
+        color: #FFFFFF;
+    }
+    button{
+        border: 1px solid $white;
+        &:hover{
+            background-color: $yellow_dark;
+            color: $black;
+        }
+    }
+    .col-4, .col-2 ,.col-6 {
+        padding: 0.2rem;
+    }
+}
+.color_placeholder_red{
+    ::placeholder{
+        color: #ff0000 !important;
+    }
+}
+
+@media (max-width: 575.98px) { 
+    #main_contabilità{
+        height: 82%;
+    }
+}
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) { 
+    #main_contabilità{
+        
+        tbody{
+            max-height: 59vh;
+        }
+    }
+}

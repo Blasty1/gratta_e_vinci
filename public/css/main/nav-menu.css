@@ -1,0 +1,49 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "Sora";
+  src: url("/fonts/Sora/Sora-VariableFont_wght.ttf");
+}
+
+#nav-menu {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  z-index: 9999;
+  background-color: #fdc500;
+  height: 55%;
+  border: 3px solid #FFFFFF;
+}
+
+#nav-menu a:nth-child(odd) {
+  background: #ffd500;
+}
+
+#nav-menu .navbar-nav {
+  height: 100%;
+}
+
+.lettersUp {
+  text-transform: capitalize;
+  color: #000000 !important;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 0.4em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media (max-width: 575.98px) {
+  #main_contabilità {
+    height: 82%;
+  }
+}
+/*# sourceMappingURL=nav-menu.css.map */

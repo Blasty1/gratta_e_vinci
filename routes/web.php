@@ -22,5 +22,5 @@ Route::get('/', function () {
 Route::get('/google/redirect', [App\Http\Controllers\LoginGoogleController::class,'store']);
 Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 
-Route::get('/contabilizza/{tobaccoShop}',[TobaccoShopController::class,'show'])->middleware('ownerOrEmployee');
+Route::get('/contabilizza/{tobaccoShop}',[TobaccoShopController::class,'show'])->middleware(['ownerOrEmployee','auth']);
 require __DIR__.'/auth.php';

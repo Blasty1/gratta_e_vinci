@@ -12,6 +12,9 @@ class ScratchAndWinTobaccoShop extends Model
         'quantity' , 
         'employee_id', // who has sold the item
         'tobaccoShop_id',
-        'scratchAndWin_id'
+        'scratchAndWin_id',
+        'tokenPackage',
+        'numberOfPackage'
     ];
+    protected $table = 'scratch_and_win_tobacco_shop';
 }

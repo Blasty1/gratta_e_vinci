@@ -1,0 +1,31 @@
+@import './../setUpProject';
+#nav-menu{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    z-index: 9999;
+    background-color: $yellow_dark;
+    a:nth-child(odd) { background: $yellow_light; }
+    height: 55%;
+    .navbar-nav{
+        height: 100%;
+    }
+    border: 3px solid $white;
+
+}
+.lettersUp{
+    text-transform: capitalize;
+    color: $black !important;
+    flex: 1;
+    padding: 0.4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+@media (max-width: 575.98px) { 
+    #main_contabilità{
+        height: 82%;
+    }
+}

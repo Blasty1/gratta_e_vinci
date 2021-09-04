@@ -1,0 +1,20 @@
+#icons {
+  position: absolute;
+  top: -11%;
+  left: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#icons svg {
+  height: 3.5rem;
+}
+/*# sourceMappingURL=nav-icons.css.map */

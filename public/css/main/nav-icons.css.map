@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,MAAM,CAAA;EACF,QAAQ,EAAE,QAAQ;EAClB,GAAG,EAAE,IAAI;EACT,IAAI,EAAE,CAAC;EACP,KAAK,EAAE,IAAI;EACX,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,aAAa;EAC9B,WAAW,EAAE,MAAM;CAKtB;;AAZD,AAQI,MARE,CAQF,GAAG,CAAC;EACA,MAAM,EAAE,MAAM;CACjB",
+    "sources": [
+        "nav-icons.scss"
+    ],
+    "names": [],
+    "file": "nav-icons.css"
+}

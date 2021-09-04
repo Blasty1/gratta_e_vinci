@@ -22,6 +22,9 @@ class ScratchAndWinTobaccoShopSeeder extends Seeder
                 'scratchAndWin_id' => rand(1,10) ,
                 'quantity' => rand(1,1000),
                 'employee_id' => rand(2,13),
+                'tokenPackage' => \Str::random(4),
+                'numberOfPackage' => \Str::random(2),
+
 
             ]
         );

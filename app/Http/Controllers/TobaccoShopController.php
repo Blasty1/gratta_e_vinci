@@ -46,7 +46,11 @@ class TobaccoShopController extends Controller
      */
     public function show(TobaccoShop $tobaccoShop)
     {
-        //
+        //\Auth::logout();
+        return view('contabilità', [
+            'user'  => \Auth::user(),
+            'tobaccoShop' => $tobaccoShop
+        ]);
     }
 
     /**

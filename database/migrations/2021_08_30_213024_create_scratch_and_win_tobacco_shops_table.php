@@ -13,12 +13,14 @@ class CreateScratchAndWinTobaccoShopsTable extends Migration
      */
     public function up()
     {
-        Schema::create('scratch_and_win_tobacco_shops', function (Blueprint $table) {
+        Schema::create('scratch_and_win_tobacco_shop', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tobaccoShop_id');
             $table->foreignId('scratchAndWin_id');
             $table->integer('quantity');
-            $table->foreignId('employee_id');
+            $table->foreignId('employee_id')->nullable();
+            $table->string('tokenPackage');
+            $table->string('numberOfPackage');
 
             $table->foreign('tobaccoShop_id')->references('id')->on('tobacco_shops');
             $table->foreign('scratchAndWin_id')->references('id')->on('scratch_and_wins');

@@ -14,13 +14,10 @@ class ScratchAndWinSeeder extends Seeder
      */
     public function run()
     {
-        for ( $i = 0; $i <10 ; $i++)
+        $itemsToStore =  \Config::get('scratchAndWinApp');
+        foreach ( $itemsToStore as $singleItem )
         {
-            ScratchAndWin::create([
-                'name' => \Str::random(10),
-                'prize' => rand($i,50),
-                'token' => \Str::random(4),
-            ]);
+            ScratchAndWin::create($singleItem);
         }
         
     }
