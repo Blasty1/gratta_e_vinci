@@ -9,6 +9,9 @@
                 <li class="nav-item" role="presentation">
                     <a class="nav-link"  href="/signIn" role="tab">Impostazioni</a>
                 </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link"  href="/user/logout" role="tab">Esci</a>
+                </li>
             </ul>
 </nav>
     <div class="container-fluid h-100">

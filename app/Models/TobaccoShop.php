@@ -18,15 +18,17 @@ class TobaccoShop extends Model
 
 
 
-
-    public function scratchAndWins()
+    // $time refers to a timestamp that indicates the range where find items sold
+    public function scratchAndWins($time=null)
     {
-        return $this->belongsToMany(ScratchAndWin::class,'scratch_and_win_tobacco_shop','tobaccoShop_id','scratchAndWin_id')->withPivot('employee_id','quantity','id','created_at')->wherePivot('created_at','>=',Carbon::today());
+        $relationShip = $this->belongsToMany(ScratchAndWin::class,'scratch_and_win_tobacco_shop','tobaccoShop_id','scratchAndWin_id')->withPivot('employee_id','quantity','id','created_at','tokenPackage');
+        if( $time ) return $relationShip->wherePivot('created_at','>=',$time);
+        return $relationShip;
     }
     public function employees($id=null)
     {
         if($id) return $this->belongsToMany(User::class, 'employees','tobaccoShop_id','user_id')->where('user_id',$id)->get();
-        return $this->belongsToMany(User::class, 'employees','tobaccoShop_id','user_id');
+        return $this->belongsToMany(User::class, 'employees','tobaccoShop_id','user_id')->withPivot('created_at');
     }
     public function owner()
     {

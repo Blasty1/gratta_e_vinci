@@ -20,7 +20,7 @@ class ScratchAndWinTobaccoShopSeeder extends Seeder
             [
                 'tobaccoShop_id' => 1,
                 'scratchAndWin_id' => rand(1,10) ,
-                'quantity' => rand(1,1000),
+                'quantity' => -rand(1,1000),
                 'employee_id' => rand(2,13),
                 'tokenPackage' => \Str::random(4),
                 'numberOfPackage' => \Str::random(2),
@@ -28,6 +28,23 @@ class ScratchAndWinTobaccoShopSeeder extends Seeder
 
             ]
         );
+        /* 
+         ScratchAndWinTobaccoShop::insert(
+             [
+                 'tobaccoShop_id' => 1,
+                 'scratchAndWin_id' => rand(1,10) ,
+                 'quantity' => -rand(1,1000),
+                 'employee_id' => rand(2,13),
+                 'tokenPackage' => \Str::random(4),
+                 'numberOfPackage' => \Str::random(2),
+                 'created_at' => Carbon::now()->addMonth(2)
+                 
+ 
+             ]
+        );
+
+
+        */
     }
     }
 }

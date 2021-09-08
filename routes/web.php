@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginGoogleController;
 use App\Http\Controllers\TobaccoShopController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,5 @@ Route::get('/google/redirect', [App\Http\Controllers\LoginGoogleController::clas
 Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 
 Route::get('/contabilizza/{tobaccoShop}',[TobaccoShopController::class,'show'])->middleware(['ownerOrEmployee','auth']);
+Route::get('/user/logout',[LoginGoogleController::class,'closeSession']);
 require __DIR__.'/auth.php';

@@ -11,12 +11,12 @@ return [
         'prize' => 10
     ],
     [
-        'name' => 'Tutto x Tutto' ,
+        'name' => 'Tutto x Tutto 10' ,
         'token' => 3011,
         'prize' => 10
     ],
     [
-        'name' => 'Tutto x Tutto' ,
+        'name' => 'Tutto x Tutto 5' ,
         'token' => 3010,
         'prize' => 5
     ],
@@ -36,14 +36,9 @@ return [
         'prize' => 5
     ],
     [
-        'name' => 'Miliardario' ,
+        'name' => 'Miliardario 5' ,
         'token' => 3035,
         'prize' => 5
-    ],
-    [
-        'name' => 'Tutto x Tutto' ,
-        'token' => 3011,
-        'prize' => 10
     ],
     [
         'name' => 'Doppia Sfida' ,
@@ -89,7 +84,11 @@ return [
         'name' => 'Turista Per 10 Anni' ,
         'token' => 3024,
         'prize' => 2
-    ]
+    ],
+    'guadagno' => 0.08,
+    'valore_pacco' => 300,
 ];
+
+
 
 ?>

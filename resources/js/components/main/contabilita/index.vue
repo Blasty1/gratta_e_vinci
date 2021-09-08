@@ -4,15 +4,19 @@
         <transition name="slide-fade">
    <nav-menu v-if="nav_menu"></nav-menu>
         </transition>
-          <component v-bind:is="componentToOpen"></component>
+          <component v-bind:is="componentToOpen.name"></component>
      </div>
 </template>
 <script>
 export default {
     data(){
         return {
-            componentToOpen : 'contabilita',
-            nav_menu : false
+            componentToOpen : {
+              'name' : 'contabilita',
+              'parametres' : {}
+            },
+            nav_menu : false,
+            comeBack : '/dashboard'
         }
     },
     methods : {

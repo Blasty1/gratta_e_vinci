@@ -13,8 +13,8 @@
   <tbody ref="table">
     <tr v-for="(scratchAndWin, index) in scratchAndWinSold" :key="index"  :class="{ 'itemsExceptFirst' :  index != 0}">
       <td scope="row">{{scratchAndWin.name}}</td>
-      <td>{{ scratchAndWin.prize * scratchAndWin.pivot.quantity }}</td>
-      <td>{{  scratchAndWin.pivot.quantity  }}</td>
+      <td>{{ Math.abs( scratchAndWin.prize * scratchAndWin.pivot.quantity) }}</td>
+      <td>{{  Math.abs(scratchAndWin.pivot.quantity)  }}</td>
       <td>{{ ( scratchAndWin.user &&  scratchAndWin.user.name ) || 'Gestore' }}</td>
       <td>{{ moment(scratchAndWin.pivot.created_at).format('LT')  }}</td>
       <td @click="deleteScratchAndWinSold(scratchAndWin.pivot.id, index)" v-if="$parent.user_logged.id === $parent.tobacco_shop.user_id" role="button">&times</td>
@@ -94,7 +94,7 @@ export default {
             this.cleanInputErrors(this.dataToSubmit)
             this.allDataIsBeenInserted(this.dataToSubmit)
             if( this.thereAreErrors(this.dataToSubmit) ) return 
-
+            this.quantity.value = - this.quantity.value
             axios
                 .post('/api/contabilizza/' + this.$parent.tobacco_shop.id + '/scratchAndWins/store' , this.getDatasFormatted(this.dataToSubmit))
                 .then(response => (this.submitDataFrontEnd(response.data) ))
@@ -103,6 +103,7 @@ export default {
     },
     mounted(){
         this.getScratchAndWinSold()
+        this.comeBack = '/dashboard'
     }
 }
 </script>

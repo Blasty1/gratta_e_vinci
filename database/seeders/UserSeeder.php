@@ -22,6 +22,13 @@ class UserSeeder extends Seeder
             'password' => \Hash::make('brunleon'),
             'street_address' => 'Avellino Ariano Irpino 83031',
         ]);
+        User::create([
+            'name' => 'Marco',
+            'surname' => 'Blast',
+            'email' => 'bruno.carchia@liceoparzanese.edu.it',
+            'password' => \Hash::make('brunleon'),
+            'street_address' => 'Avellino Ariano Irpino 83031',
+        ]);
 
         for($i = 0 ; $i < 15; $i++)
         {

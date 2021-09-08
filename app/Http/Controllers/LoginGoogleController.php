@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Routing\RoutingServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 class LoginGoogleController extends Controller
@@ -20,15 +22,16 @@ class LoginGoogleController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * logout user
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function closeSession()
     {
-        //
+        Auth::logout();
+        return redirect(RouteServiceProvider::HOME);
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *

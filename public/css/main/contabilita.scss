@@ -72,6 +72,12 @@ html , body {
         color: #ff0000 !important;
     }
 }
+.color_placeholder_white
+{
+    ::placeholder{
+        color: $white ;
+    }
+}
 
 @media (max-width: 575.98px) { 
     #main_contabilità{

@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
             TobaccoShopSeeder::class,
             ScratchAndWinSeeder::class,
             EmployeeSeeder::class,
-            ScratchAndWinTobaccoShopSeeder::class,
         ]);
 
     }

@@ -17,4 +17,5 @@ class ScratchAndWinTobaccoShop extends Model
         'numberOfPackage'
     ];
     protected $table = 'scratch_and_win_tobacco_shop';
+
 }

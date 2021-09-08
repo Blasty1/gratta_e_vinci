@@ -21,7 +21,11 @@ export const manipulateDatas = {
             {
                 for( let singleData of dataToCheck)
                 {
-                    if( this[singleData].error ) return true 
+                    if( this[singleData].error )
+                    {
+                        this[singleData].value = ''
+                        return true 
+                    }
                 }
             },
             getDatasFormatted(dataToCheck)

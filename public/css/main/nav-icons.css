@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Sora";
+  src: url("/fonts/Sora/Sora-VariableFont_wght.ttf");
+}
+
 #icons {
   position: absolute;
   top: -11%;
@@ -16,5 +21,11 @@
 
 #icons svg {
   height: 3.5rem;
+}
+
+#title_nav {
+  color: #FFFFFF;
+  text-transform: capitalize;
+  font-family: "Sora";
 }
 /*# sourceMappingURL=nav-icons.css.map */

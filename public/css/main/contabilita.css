@@ -117,6 +117,22 @@ html, body {
   color: #ff0000 !important;
 }
 
+.color_placeholder_white ::-webkit-input-placeholder {
+  color: #FFFFFF;
+}
+
+.color_placeholder_white :-ms-input-placeholder {
+  color: #FFFFFF;
+}
+
+.color_placeholder_white ::-ms-input-placeholder {
+  color: #FFFFFF;
+}
+
+.color_placeholder_white ::placeholder {
+  color: #FFFFFF;
+}
+
 @media (max-width: 575.98px) {
   #main_contabilità {
     height: 82%;
