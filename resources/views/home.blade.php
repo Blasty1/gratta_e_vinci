@@ -7,8 +7,8 @@
         <title>Home</title>
 
      <link href="/css/app.css" rel="stylesheet">
-     <link rel="stylesheet" href="./css/home/login.css">
-     <link rel="stylesheet" href="./css/home/signin.css">
+     <link rel="stylesheet" href="{{ asset('/css/home/login.css')}}">
+     <link rel="stylesheet" href="{{ asset('/css/home/signin.css') }}">
      <link rel="stylesheet" href="{{ asset('css/home/home.css') }}">
 
 
