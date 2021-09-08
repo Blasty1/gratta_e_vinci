@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
+use App\Models\EmployeeToken;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -54,7 +56,15 @@ class LoginGoogleController extends Controller
             ]);
 
             event(new Registered($user_found));
-
+            $token = EmployeeToken::where('email',$user_found->email)->get()->first();
+            if ( $token ) 
+            {
+                Employee::create([
+                    'user_id' => $user_found->id,
+                    'tobaccoShop_id' => $token->tobaccoShop_id,
+                ]);
+                $token->delete();
+            }
             $user_found->notify( new \App\Notifications\Registered());
 
         }

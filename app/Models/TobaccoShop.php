@@ -27,7 +27,7 @@ class TobaccoShop extends Model
     }
     public function employees($id=null)
     {
-        if($id) return $this->belongsToMany(User::class, 'employees','tobaccoShop_id','user_id')->where('user_id',$id)->get();
+        if($id) return $this->belongsToMany(User::class, 'employees','tobaccoShop_id','user_id')->wherePivot('user_id',$id)->get();
         return $this->belongsToMany(User::class, 'employees','tobaccoShop_id','user_id')->withPivot('created_at');
     }
     public function owner()

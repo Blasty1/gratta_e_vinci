@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\ScratchAndWin;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Log;
 
 class ScratchAndWinSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class ScratchAndWinSeeder extends Seeder
         $itemsToStore =  \Config::get('scratchAndWinApp');
         foreach ( $itemsToStore as $singleItem )
         {
+            if(!is_array($singleItem) ) continue;
             ScratchAndWin::create($singleItem);
         }
         

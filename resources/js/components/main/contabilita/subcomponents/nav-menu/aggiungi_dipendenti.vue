@@ -61,12 +61,12 @@ export default {
             axios
                 .delete('/api/contabilita/' + this.$parent.tobacco_shop.id + '/employees/' + this.employees[keyOfArrayWhereAreEmployees].id)
                 .then(response => this.deleteEmployeeFrontEnd(keyOfArrayWhereAreEmployees))
-                .error(errorName => console.log(errorName))
+                .catch(errorName => console.log(errorName))
         },
 
         submitDataFrontEnd(newEmployee)
         {
-            this.employees.unshift(newEmployee)
+            if( newEmployee ) this.employees.unshift(newEmployee)
             this.email.value = ''
         },
         submitData()

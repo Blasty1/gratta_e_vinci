@@ -203,8 +203,9 @@ export default {
         submitData()
         {
             if (!this.canSubmitData() ) return 
+            let token = new URL(location.href).searchParams.get('token') ? { 'token' : new URL(location.href).searchParams.get('token') } : null
             axios
-                .post('/api/users',this.getDatasFormatted(this.dataToSubmit))
+                .post('/api/users',{...this.getDatasFormatted(this.dataToSubmit),...token })
                 .then(response => (window.open('/dashboard','_self')))
                 .catch(errors => this.getErrorsFromBackEnd(errors.response.data, this))
         }

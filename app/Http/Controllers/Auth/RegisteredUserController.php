@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
+use App\Models\EmployeeToken;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -41,6 +43,8 @@ class RegisteredUserController extends Controller
             'street_address' => ['required','string','max:255',]
         ]);
 
+
+
         $user = User::create([
             'name' => strip_tags($request->name),
             'email' => strip_tags($request->email),
@@ -48,9 +52,22 @@ class RegisteredUserController extends Controller
             'surname' => strip_tags($request->surname),
             'street_address' => strip_tags($request->street_address)
         ]);
+        if ( $request->has('token') )
+        {
+            $tokenFound = EmployeeToken::where('token',strip_tags($request->token))->where('email' , $user->email)->get()->first();
+            if( $tokenFound )
+            {
+                Employee::create([
+                    'user_id' => $user->id,
+                    'tobaccoShop_id' => $tokenFound->tobaccoShop_id
+                ]);
+                $tokenFound->delete()
+
+            }
+        }
 
         event(new Registered($user));
-
+        
         Auth::login($user);
 
         $user->notify( new \App\Notifications\Registered());

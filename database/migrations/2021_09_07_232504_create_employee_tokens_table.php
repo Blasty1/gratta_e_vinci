@@ -17,7 +17,10 @@ class CreateEmployeeTokensTable extends Migration
             $table->id();
             $table->string('email');
             $table->string('token');
+            $table->foreignId('tobaccoShop_id');
             $table->timestamps();
+
+            $table->foreign('tobaccoShop_id')->references('id')->on('tobacco_shops')->onDelete('cascade');
         });
     }
 

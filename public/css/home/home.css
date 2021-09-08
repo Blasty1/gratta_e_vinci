@@ -42,8 +42,8 @@ section {
 }
 
 #title_home {
-  position: fixed;
-  bottom: 0;
+  position: absolute;
+  bottom: -25%;
   left: 0;
 }
 

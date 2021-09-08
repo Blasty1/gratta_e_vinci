@@ -22,9 +22,9 @@ class CreateScratchAndWinTobaccoShopsTable extends Migration
             $table->string('tokenPackage');
             $table->string('numberOfPackage');
 
-            $table->foreign('tobaccoShop_id')->references('id')->on('tobacco_shops');
-            $table->foreign('scratchAndWin_id')->references('id')->on('scratch_and_wins');
-            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('tobaccoShop_id')->references('id')->on('tobacco_shops')->onDelete('cascade');
+            $table->foreign('scratchAndWin_id')->references('id')->on('scratch_and_wins')->onDelete('cascade');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('set null');
 
             $table->timestamps();
         });

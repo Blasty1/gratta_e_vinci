@@ -69,13 +69,13 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-</div>
-
-    
-    <div class=" col-12 flex-grow-1  px-0 align-items-center  d-flex flex-column justify-content-center" id="title_home">
+  <div class=" col-12 flex-grow-1  px-0 align-items-center  d-flex flex-column justify-content-center" id="title_home">
             <h1>Gestionale GV</h1>
              <p>Un programma che ti aiuta a verificare quanti gratta e vinci vendi in maniera gratuita</p>
         </div>
+</div>
+
+
         </section>
     <section class="fade show tab-pane"  id="signIn" role="tabpanel" aria-labelledby="signIn-tab">
         <login ></login>

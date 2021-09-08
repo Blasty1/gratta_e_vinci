@@ -20,7 +20,7 @@ class CreateTobaccoShopsTable extends Migration
             $table->foreignId('user_id');
             $table->string('token');
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

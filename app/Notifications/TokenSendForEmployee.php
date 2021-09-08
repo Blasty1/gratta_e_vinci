@@ -7,10 +7,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class EmployeeAdded extends Notification
+class TokenSendForEmployee extends Notification
 {
     use Queueable;
     protected $tobaccoShop;
+
     /**
      * Create a new notification instance.
      *
@@ -41,10 +42,12 @@ class EmployeeAdded extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Dipendente')
-                    ->greeting('Ciao ' . $notifiable->name)
-                    ->line('Sei stato aggiunto come dipendente presso la tabaccheria ' . $this->tobaccoShop->name)
-                    ->line('Se non le risulta di lavorare in quest\'azienda contatti il proprietario all\'email ' . $this->tobaccoShop->owner->email);
+                    ->subject('Sei stato invitato in GV Gestore')
+                    ->greeting('Ciao hai ricevuto un invito')
+                    ->line('Il proprietario della tabaccheria ' . $this->tobaccoShop->name . ' ha scelto te come suo dipendente' )
+                    ->line('Ma non sei iscritto, quindi clicca qui per iscriverti')
+                    ->action('Iscriviti', url('/'). '?' . http_build_query(['token' =>$notifiable->token]))
+                    ->line('Se hai ricevuto quest\'email ma non lavori in una tabaccheria contatta ' . $this->tobaccoShop->owner->email );
     }
 
     /**

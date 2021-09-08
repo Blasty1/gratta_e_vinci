@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\EmployeeToken;
 use App\Models\TobaccoShop;
 use App\Models\User;
 use App\Notifications\EmployeeAdded;
+use App\Notifications\TokenSendForEmployee;
 use App\Traits\employeeHandle;
 use Illuminate\Http\Request;
 
@@ -44,8 +46,45 @@ class EmployeeController extends Controller
         $request->validate([
             'email' => 'email|required'
         ]);
+
         $isUserJustRegistered = User::where('email',strip_tags(htmlentities($request->email)))->get()->first();
-        if( $isUserJustRegistered ) return  $isUserJustRegistered->notify(new EmployeeAdded());
+        
+        if( $isUserJustRegistered )
+        { 
+
+            if( count($tobaccoShop->employees($isUserJustRegistered->id)) ) 
+            { 
+                    return response()->json([
+                        'errors' => [ 'email' => [ 'Utente già vostro dipendente' ] ]
+                    ],402);
+            }
+
+            $isUserJustRegistered->notify(new EmployeeAdded($tobaccoShop));
+            Employee::create([
+                'user_id' => $isUserJustRegistered->id,
+                'tobaccoShop_id' => $tobaccoShop->id,
+                
+            ]);
+        }else
+        {
+            if( EmployeeToken::where('email',strip_tags(htmlentities($request->email)))->get()->first() ) 
+            {
+                return response()->json([
+                    'errors' => [ 'email' => [ 'Utente già invitato' ] ]
+                ],402);
+            }
+            $token = EmployeeToken::create([
+                'token' => \Str::random(20),
+                'email' => strip_tags(htmlentities($request->email)),
+                'tobaccoShop_id' => $tobaccoShop->id
+            ]);
+
+            $token->notify( new TokenSendForEmployee($tobaccoShop));
+
+
+
+
+        }
 
         
     }
@@ -97,6 +136,6 @@ class EmployeeController extends Controller
      */
     public function destroy($tobaccoShop,$employee)
     {
-        if(TobaccoShop::find($tobaccoShop)->employees($employee)) Employee::find($employee)->delete();
+        if(TobaccoShop::find($tobaccoShop)->employees($employee)) Employee::where('user_id',$employee)->delete();
     }
 }

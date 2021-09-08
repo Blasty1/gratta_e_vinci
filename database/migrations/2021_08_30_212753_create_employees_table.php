@@ -18,8 +18,8 @@ class CreateEmployeesTable extends Migration
             $table->foreignId('user_id');
             $table->foreignId('tobaccoShop_id');
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('tobaccoShop_id')->references('id')->on('tobacco_shops');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('tobaccoShop_id')->references('id')->on('tobacco_shops')->onDelete('cascade');
             $table->timestamps();
         });
     }
