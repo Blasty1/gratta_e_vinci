@@ -84,6 +84,9 @@ section {
 }
 
 @media (max-width: 575.98px) {
+  #title_home {
+    bottom: -46%;
+  }
   #title_home h1 {
     font-size: 3.7em !important;
   }
