@@ -35,7 +35,19 @@ class TobaccoShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:256|',
+            'street_address' => 'required|max:256'
+        ]);
+
+        $newTobacco = TobaccoShop::create([
+            'name' => strip_tags($request->name),
+            'street_address' => strip_tags($request->street_address),
+            'user_id' => $request->user()->id,
+            'token' => \Str::random(10)
+        ]);
+
+        return $newTobacco;
     }
 
     /**

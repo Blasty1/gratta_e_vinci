@@ -10,12 +10,8 @@ class TobaccoShop extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name' , 'street_address', 'user_id'
+        'name' , 'street_address', 'user_id', 'token'
     ];
-    protected $hidden = [
-        'token'
-    ];
-
 
 
     // $time refers to a timestamp that indicates the range where find items sold

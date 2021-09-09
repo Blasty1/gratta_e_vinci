@@ -18,6 +18,8 @@ html , body {
 
     height: 45vh;
     width: 90%;
+    overflow-y: hidden;
+    overflow-x: hidden;
     border: 1px solid $white;
     font-family: $font-title;
     color: white;
@@ -25,6 +27,28 @@ html , body {
     list-style: none;
     padding-left: 1em;
     padding-right: 1em;
+    input , select{
+        width: 80%;
+        height: 5em;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1rem;
+        padding: 0.5rem;
+        border: 1px solid $white;
+        background-color: $blue;
+        color: $white;
+        margin-top: 0.8em;
+        &::placeholder{
+            color: $white;
+        }
+    }
+    .invalid-feedback{
+        font-size: 0.5em;
+        margin: 0;
+        padding: 0;
+    }
+    .is-invalid{
+        border: 1px solid #ff0000;
+    }
     .title{
         text-align: center;
         border-bottom: 1px solid $white;
@@ -32,6 +56,9 @@ html , body {
 
 
     }
+    ul{
+        padding: 0;
+        max-height:75%;
     li {
         overflow: auto;
         max-height: 4vh;
@@ -40,6 +67,19 @@ html , body {
             text-decoration: none;
         }
     }
+}
+}
+.buttonSubmit{
+    height: 2em;
+    border: 1px solid $white;
+    color: $black;
+    background-color: $white;
+    &:hover{
+        background-color: $yellow_dark;
+    }
+    margin-top: 0.8em;
+
+
 }
 #buttonImprenditore{
     background-color: $blu_dark;

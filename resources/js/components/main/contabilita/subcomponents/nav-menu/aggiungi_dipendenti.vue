@@ -13,7 +13,7 @@
       <td>{{ employee.name + ' ' + employee.surname}}</td>
       <td>{{Math.abs(employee.scratchAndWinSold) }}</td>
       <td>{{  moment(employee.pivot.created_at).format('D/M/Y') }}</td>
-      <td @click="deleteEmployee(key)">&times</td>
+      <td @click="deleteEmployee(key)" role="button" >&times</td>
 
     </tr>
   </tbody >

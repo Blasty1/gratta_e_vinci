@@ -61,7 +61,7 @@ return [
         'prize' => 2
     ],
     [
-        'name' => 'Sette e Mezzo' ,
+        'name' => 'Super Sette e Mezzo' ,
         'token' => '3032',
         'prize' => 3
     ],
@@ -85,6 +85,37 @@ return [
         'token' => '3024',
         'prize' => 2
     ],
+    [
+        'name' => '20x',
+        'token' => '3308',
+        'prize' => 5
+    ],
+    [
+        'name' => 'monetine fortunate',
+        'token' => '3025',
+        'prize' => 1
+    ],
+    [
+        'name' => 'Maxi Miliardario',
+        'token' => '3037',
+        'prize' => 20
+    ],
+    [
+        'name' => 'Numeri fortunati',
+        'token' => '3030',
+        'prize' => 3
+    ],
+    [
+        'name' => 'Sette e mezzo 1',
+        'token' => '3013',
+        'prize' => 1
+    ],
+    [
+        'name' => '50x',
+        'token' => '3304',
+        'prize' => 10
+    ]
+
     'guadagno' => 0.08,
     'valore_pacco' => 300,
 ];
