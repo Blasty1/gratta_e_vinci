@@ -152,7 +152,10 @@ html, body {
   #buttonDipendente input, #buttonDipendente select, #buttonImprenditore input, #buttonImprenditore select {
     height: 75%;
   }
-  .buttonSubmit {
+  #buttonDipendente ul li, #buttonImprenditore ul li {
+    max-height: 6vh;
+  }
+  #buttonDipendente .buttonSubmit, #buttonImprenditore .buttonSubmit {
     font-size: 0.7em;
   }
 }

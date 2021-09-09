@@ -18,11 +18,11 @@
     </tr>
   </tbody >
   <div class="col-12 p-0 my-2 mx-0 row row_submit">
-      <div class="col-10">
+      <div class="col-ms-10 col-8">
           <input  type="email" :class="{'form-control w-100' : true , 'is-invalid' : email.error}" :placeholder="this.email.error || 'inserisci l\'email del dipendente'" v-model="email.value"/>
     </div>
-      <div class="col-2" >
-          <button type="text" class='form-control w-100' @click.prevent="submitData()">Invia</button>
+      <div class="col-ms-2 col-4 py-0" >
+          <button type="text" class='w-100' @click.prevent="submitData()">Invia</button>
       </div>
   </div>
   
