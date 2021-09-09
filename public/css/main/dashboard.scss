@@ -117,7 +117,22 @@ html , body {
 @media (max-width: 575.98px) {
     #buttonDipendente, #buttonImprenditore{
         height: 40vh;
+        input , select{
+            height: 75%;
+        }
+        ul{
+        li {
+            max-height: 6vh;
+            
+        }
     }
+    .buttonSubmit{
+        font-size: 0.7em;
+    
+    
+    }
+
+   
 }
 
 // Large devices (desktops, less than 1200px)

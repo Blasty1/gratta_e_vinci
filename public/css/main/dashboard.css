@@ -149,6 +149,12 @@ html, body {
   #buttonDipendente, #buttonImprenditore {
     height: 40vh;
   }
+  #buttonDipendente input, #buttonDipendente select, #buttonImprenditore input, #buttonImprenditore select {
+    height: 75%;
+  }
+  .buttonSubmit {
+    font-size: 0.7em;
+  }
 }
 
 @media (min-width: 800.98px) {
