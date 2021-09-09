@@ -91,6 +91,9 @@ html, body {
   overflow-x: auto;
   overflow-y: hidden;
   max-height: 4vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 #buttonDipendente ul li a, #buttonImprenditore ul li a {
