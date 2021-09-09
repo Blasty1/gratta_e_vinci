@@ -62,7 +62,8 @@ html , body {
         padding: 0;
         max-height:75%;
     li {
-        overflow: auto;
+        overflow-x: auto;
+        overflow-y: hidden;
         max-height: 4vh;
         a {
             color: white;
@@ -111,6 +112,12 @@ html , body {
         top :46.2%;
     }
 
+}
+
+@media (max-width: 575.98px) {
+    #buttonDipendente, #buttonImprenditore{
+        height: 40vh;
+    }
 }
 
 // Large devices (desktops, less than 1200px)
