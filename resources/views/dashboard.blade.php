@@ -2,7 +2,7 @@
 @section('body')
      <link rel="stylesheet" href="./css/main/dashboard.css">
      <nav id="navbar" class="fixed-top">
-ì            <ul class="nav justify-content-center mt-2" id="myTab" role="tablist">
+            <ul class="nav justify-content-center mt-2" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active "  href="#home">{{ $user->name }}</a>
                 </li>

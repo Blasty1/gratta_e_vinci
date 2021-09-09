@@ -27,6 +27,8 @@ html , body {
     list-style: none;
     padding-left: 1em;
     padding-right: 1em;
+    margin: auto;
+
     input , select{
         width: 80%;
         height: 5em;
@@ -106,7 +108,7 @@ html , body {
 }
 @media  (max-width: 770.98px) and (max-height : 900px) { 
     .fixed-top {
-        top :43.2%;
+        top :46.2%;
     }
 
 }
