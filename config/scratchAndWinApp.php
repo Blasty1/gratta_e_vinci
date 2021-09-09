@@ -114,7 +114,7 @@ return [
         'name' => '50x',
         'token' => '3304',
         'prize' => 10
-    ]
+    ],
 
     'guadagno' => 0.08,
     'valore_pacco' => 300,
