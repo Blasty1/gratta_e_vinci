@@ -73,7 +73,7 @@ class ScratchAndWinTobaccoShopController extends Controller
      */
     public function show($tobaccoShop)
     {
-        return response()->json($this->employeeAddingUserInfo(TobaccoShop::find($tobaccoShop)->scratchAndWins(Carbon::today())->wherePivot('quantity' ,'<', 0)->get()) );
+        return response()->json($this->employeeAddingUserInfo(TobaccoShop::find($tobaccoShop)->scratchAndWins(Carbon::today())->wherePivot('quantity' ,'<', 0)->orderBy('pivot_created_at')->get()) );
     }
 
     /**
