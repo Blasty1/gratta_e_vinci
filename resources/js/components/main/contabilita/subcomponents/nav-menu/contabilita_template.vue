@@ -50,7 +50,7 @@ export default {
           let moneyGot = 0
           for(let key in this.scratchAndWinsSold)
           {
-              moneyGot += Math.abs( this.scratchAndWinsSold[key].total_quantity * this.scratchAndWinsSold[key][0].prize )
+              moneyGot += Math.abs( this.scratchAndWinsSold[key].total_money )
           }
           return moneyGot
         },

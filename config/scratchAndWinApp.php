@@ -56,6 +56,11 @@ return [
         'prize' => 3
     ],
     [
+        'name' => 'Puzzle',
+        'token' => '3033',
+        'prize' => 3
+    ],
+    [
         'name' => '10x' ,
         'token' => '3307',
         'prize' => 2
