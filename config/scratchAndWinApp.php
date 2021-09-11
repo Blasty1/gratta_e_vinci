@@ -120,6 +120,11 @@ return [
         'token' => '3304',
         'prize' => 10
     ],
+    [
+        'name' => "M'ama non m'ama ",
+        'token' => '3002',
+        'prize' => 3
+    ],
 
     'guadagno' => 0.08,
     'valore_pacco' => 300,
