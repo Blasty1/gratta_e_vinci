@@ -125,6 +125,16 @@ return [
         'token' => '3002',
         'prize' => 3
     ],
+    [
+        'name' => 'Portafortuna 5',
+        'token' => '3038',
+        'prize' => 5,
+    ],
+    [
+        'name' => 'Portafortuna 2',
+        'token' => '3034',
+        'prize' => 2
+    ],
 
     'guadagno' => 0.08,
     'valore_pacco' => 300,
