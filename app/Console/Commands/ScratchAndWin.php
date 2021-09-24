@@ -47,7 +47,7 @@ class ScratchAndWin extends Command
             if( !$scratchAndWinFound )
             {
                 ModelsScratchAndWin::create($singleScratchAndWin);
-                return ;
+                continue ;
             }
             $scratchAndWinFound->name = $singleScratchAndWin['name'];
             $scratchAndWinFound->prize = $singleScratchAndWin['prize'];

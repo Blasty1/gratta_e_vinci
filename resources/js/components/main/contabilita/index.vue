@@ -25,6 +25,10 @@ export default {
     props : {
         tobacco_shop : Object,
         user_logged : Object 
+    },
+    mounted()
+    {
+      setTimeout(function(){ window.location.reload()}, 3600000)
     }
 }
 </script>
