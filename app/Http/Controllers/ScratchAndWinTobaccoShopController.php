@@ -11,6 +11,7 @@ use App\Traits\ScratchAndWinHandler;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 
 class ScratchAndWinTobaccoShopController extends Controller
 {
@@ -23,6 +24,15 @@ class ScratchAndWinTobaccoShopController extends Controller
     public function index()
     {
         //
+    }
+
+    public function orderByTime($first_date,$second_date)
+    {
+            $first_date = Carbon::createFromFormat('d/m/Y',$first_date);
+            $second_date = Carbon::createFromFormat('d/m/Y',$second_date);
+            if ($first_date == $second_date) return ($r = 0);
+            $r = ($first_date > $second_date) ? -1: 1;
+            return $r;
     }
 
     /**
@@ -125,17 +135,9 @@ class ScratchAndWinTobaccoShopController extends Controller
             
             
         }
-        function orderByDate($first_date,$second_date)
-        {
-                $first_date = Carbon::createFromFormat('d/m/Y',$first_date);
-                $second_date = Carbon::createFromFormat('d/m/Y',$second_date);
-                if ($first_date == $second_date) return ($r = 0);
-                $r = ($first_date > $second_date) ? -1: 1;
-                return $r;
-        }
         $ordered = $scratchAndWins->toArray();
         uksort($ordered ,function($first_date,$second_date){
-            return orderByDate($first_date,$second_date);
+            return $this->orderByTime($first_date,$second_date);
         });
         return $ordered;
     }
@@ -161,18 +163,54 @@ class ScratchAndWinTobaccoShopController extends Controller
             $scratchAndWinOne['total_money_earned'] = $scratchAndWinOne['total_money'] * \Config::get('scratchAndWinApp.guadagno');
         }
         $ordered = $scratchAndWins->toArray();
-        function orderByTime($first_date,$second_date)
-        {
-                $first_date = Carbon::createFromFormat('m/Y',$first_date);
-                $second_date = Carbon::createFromFormat('m/Y',$second_date);
-                if ($first_date == $second_date) return ($r = 0);
-                $r = ($first_date > $second_date) ? -1: 1;
-                return $r;
-        }
         uksort($ordered ,function($first_date,$second_date){
-            return orderByTime($first_date,$second_date);
+            return $this->orderByTime($first_date,$second_date);
         });
         return $ordered;
+    }
+
+
+    /*
+     * ritorna gli incassi della settimana contabile 
+     *
+     * @param  int  $tobaccoShop
+     * @return \Illuminate\Http\Response
+     */
+    public function dayChoosenByUser($tobaccoShop, Request $request)
+    { 
+        $request->validate([
+            'groupBy' => [
+                Rule::in(['d', 'W','M']),
+                'required'
+            ],
+            'start' => 'required|date',
+            'finish' => 'required|date|after:start'
+        ]);
+        $groupBy = $request->groupBy;
+        $scratchAndWins = TobaccoShop::find($tobaccoShop)->scratchAndWins()->wherePivot('quantity' ,'<', 0)
+                                                                           ->wherePivot('created_at','>',Carbon::parse($request->start))
+                                                                           ->wherePivot('created_at','<',Carbon::parse($request->finish)->addDay())->get()
+                                                                           ->groupBy(function($scratchAndWin)use ($groupBy) {
+                                                                               $dateFormatted = $scratchAndWin->pivot->created_at->format($groupBy);
+                                                                               if($groupBy == 'W') return $scratchAndWin->pivot->created_at->startOfWeek()->format('d/m/Y') . ' to ' .  $scratchAndWin->pivot->created_at->endOfWeek()->format('d/m/Y') ;
+                                                                               if($groupBy == 'd') return $dateFormatted . '/' . $scratchAndWin->pivot->created_at->format('m/Y') ;
+                                                                               if($groupBy == 'M') return $dateFormatted;
+                                                                            });
+    
+        foreach( $scratchAndWins as $key => $scratchAndWinOne)
+        {
+            $scratchAndWinOne['total_quantity'] = $scratchAndWinOne->sum('pivot.quantity');
+            $scratchAndWinOne['total_money'] = $this->sumForEachItems($scratchAndWinOne);
+            $scratchAndWinOne['total_money_earned'] = $scratchAndWinOne['total_money'] * \Config::get('scratchAndWinApp.guadagno');
+        }
+        $ordered = $scratchAndWins->toArray();
+        uksort($ordered ,function($first_date,$second_date){
+            return $this->orderByTime(\Str::of($first_date)->explode(' ')[0],\Str::of($second_date)->explode(' ')[0]);
+        });
+        return $ordered;
+             
+        
+        
     }
      /**
      * Return all packages bought

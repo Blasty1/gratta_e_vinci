@@ -10,7 +10,7 @@
 export default {
     data(){
         return{
-          optionsToSelect : ['contabilita_oggi','contabilita_quotidiana','contabilita_mensile','magazzino','inserisci_nuovi_pacchi','pacchi_acquistati','aggiungi_dipendenti']
+          optionsToSelect : ['contabilita_oggi','contabilita_quotidiana','seleziona_date','contabilita_mensile','magazzino','inserisci_nuovi_pacchi','pacchi_acquistati','aggiungi_dipendenti']
         }
     },
     methods : {

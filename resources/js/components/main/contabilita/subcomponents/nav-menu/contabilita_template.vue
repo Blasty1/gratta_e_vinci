@@ -36,6 +36,13 @@ export default {
         }
     },
     props : {
+      scratch_and_wins_sold_api : Object,
+    },
+    watch : {
+      scratch_and_wins_sold_api : function(){
+        this.scratchAndWinsSold = this.scratch_and_wins_sold_api ;
+      },
+
     },
     methods : {
         getScratchAndWinsSold()
@@ -62,9 +69,16 @@ export default {
     },
     mounted()
     {
-      this.getScratchAndWinsSold()
+      if( this.scratch_and_wins_sold_api )
+      {
+        this.scratchAndWinsSold = this.scratch_and_wins_sold_api
+
+      }else
+      {
+        this.getScratchAndWinsSold()
+        this.$parent.comeBack = '/contabilizza/' + this.$parent.tobacco_shop.id
+      }
       this.$root.$on('menuOptionChanged',this.updateDatas)
-      this.$parent.comeBack = '/contabilizza/' + this.$parent.tobacco_shop.id
     },
 
 }

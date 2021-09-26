@@ -6,6 +6,11 @@
     width: 100%;
     z-index: 9999;
     background-color: $yellow_dark;
+    a:hover{
+        background-color: $blue !important;
+        color: $white !important;
+        cursor: pointer;
+    }
     a:nth-child(odd) { background: $yellow_light; }
     height: 55%;
     .navbar-nav{

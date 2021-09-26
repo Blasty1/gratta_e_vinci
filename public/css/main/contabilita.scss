@@ -53,7 +53,7 @@ html , body {
 .row_submit{
     button , input{
         height: 8vh;
-        background-color: #00509d;
+        background-color: $blue;
         color: #FFFFFF;
     }
     button{
@@ -78,12 +78,33 @@ html , body {
         color: $white ;
     }
 }
-
-@media (max-width: 575.98px) { 
-    #main_contabilità{
-        height: 82%;
-        padding: 0.4em;
+.boxSelezionaDate{
+    flex: 1;
+    color: #FFFFFF;
+    p {
+        margin: 0;
     }
+    input ,  select {
+        height: 8vh;
+        background-color: $blue;
+        width: 80%;
+        border: 1px solid $white;
+        color: $white;
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#inputsForDates{
+    display: flex;
+    flex-direction: row;
+}
+.changeMaxHeight{
+ 
+        tbody{
+            max-height: 50vh !important;
+        }
 }
 // Small devices (landscape phones, less than 768px)
 @media (max-width: 767.98px) { 
@@ -93,4 +114,24 @@ html , body {
             max-height: 54vh;
         }
     }
+    .changeMaxHeight{
+            
+            tbody{
+                max-height: 51vh !important;
+            
+        }
+    }
+}
+@media (max-width: 575.98px) { 
+    #main_contabilità{
+        height: 82%;
+        padding: 0.4em;
+    }
+    .changeMaxHeight{
+            
+        tbody{
+            max-height: 47vh !important;
+        
+    }
+}
 }

@@ -37,3 +37,4 @@ Route::get('/contabilita/{tobaccoShop}/employees', [EmployeeController::class,'s
 Route::delete('/contabilita/{tobaccoShop}/employees/{employee}', [EmployeeController::class,'destroy'] )->middleware(['auth:sanctum', 'owner']);
 Route::post('/contabilita/{tobaccoShop}/employee/add', [EmployeeController::class,'store'] )->middleware(['auth:sanctum', 'owner']);
 Route::post('/contabilizza/tobaccoShop/new', [TobaccoShopController::class,'store'] )->middleware(['auth:sanctum']);
+Route::post('/contabilita/{tobaccoShop}/custom', [ScratchAndWinTobaccoShopController::class,'dayChoosenByUser'])->middleware(['auth:sanctum', 'owner']);

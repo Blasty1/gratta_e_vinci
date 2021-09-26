@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\ScratchAndWinTobaccoShop;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class ScratchAndWinTobaccoShopSeeder extends Seeder
@@ -24,6 +25,7 @@ class ScratchAndWinTobaccoShopSeeder extends Seeder
                 'employee_id' => rand(2,13),
                 'tokenPackage' => \Str::random(4),
                 'numberOfPackage' => \Str::random(2),
+                'created_at' => Carbon::today()->subDays(rand(2,20)),
 
 
             ]
