@@ -26,6 +26,11 @@ trait ScratchAndWinHandler{
     {
         return ScratchAndWinTobaccoShop::where('tokenPackage' , $tokenToCheck)->get()->first();
     }
+    function getAllPackagesNotSold()
+    {
+        $allScratchAndWinSold = ScratchAndWinTobaccoShop::all()->groupBy('tokenPackage');
+
+    }
 }
 
 

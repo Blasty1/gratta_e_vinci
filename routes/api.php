@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ScratchAndWinTobaccoShopController;
 use App\Http\Controllers\TobaccoShopController;
 use App\Models\TobaccoShop;
+use Facade\Ignition\Support\Packagist\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,3 +40,4 @@ Route::delete('/contabilita/{tobaccoShop}/employees/{employee}', [EmployeeContro
 Route::post('/contabilita/{tobaccoShop}/employee/add', [EmployeeController::class,'store'] )->middleware(['auth:sanctum', 'owner']);
 Route::post('/contabilizza/tobaccoShop/new', [TobaccoShopController::class,'store'] )->middleware(['auth:sanctum']);
 Route::post('/contabilita/{tobaccoShop}/custom', [ScratchAndWinTobaccoShopController::class,'dayChoosenByUser'])->middleware(['auth:sanctum', 'owner']);
+Route::get('/packages/inselling',[PackageController::class,'show'])->middleware(['auth:sanctum', 'owner']);

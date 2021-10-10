@@ -12,7 +12,7 @@ export default {
     data(){
         return {
             componentToOpen : {
-              'name' : 'contabilita',
+              'name' : 'magazzino',
               'parametres' : {}
             },
             nav_menu : false,
