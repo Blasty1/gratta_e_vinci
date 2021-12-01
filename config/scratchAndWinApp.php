@@ -135,6 +135,16 @@ return [
         'token' => '3034',
         'prize' => 2
     ],
+    [
+        'name' => 'Viaggio di Natale',
+        'token' => '3312',
+        'prize' => 10
+    ],
+    [
+        'name' => 'Bianco Natale',
+        'token' => '3039',
+        'prize' => 3
+    ],
 
     'guadagno' => 0.08,
     'valore_pacco' => 300,
