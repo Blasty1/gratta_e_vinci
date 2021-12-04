@@ -86,8 +86,6 @@ export default {
             this.token.value = ""
             this.quantity.value = 1
             this.$nextTick(() => this.$refs.tokenInput.focus())        
-
-
         },
         submitData()
         {
