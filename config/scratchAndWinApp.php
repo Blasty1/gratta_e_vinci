@@ -145,6 +145,11 @@ return [
         'token' => '3039',
         'prize' => 3
     ],
+    [
+        'name' => 'Dolce Natale',
+        'token' => '3310',
+        'prize' => 3
+    ],
 
     'guadagno' => 0.08,
     'valore_pacco' => 300,
