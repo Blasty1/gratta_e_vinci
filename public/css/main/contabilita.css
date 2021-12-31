@@ -35,6 +35,11 @@ html, body {
   position: relative;
 }
 
+.changeBGRow {
+  background-color: #ffd500 !important;
+  color: black !important;
+}
+
 #contabilita_table {
   color: #FFFFFF;
 }
@@ -64,6 +69,13 @@ html, body {
   width: 100%;
   table-layout: fixed;
   text-align: center;
+}
+
+#contabilita_table tbody > tr {
+  background-color: transparent;
+  color: white;
+  -webkit-transition: background-color 1000ms linear;
+  transition: background-color 1000ms linear;
 }
 
 #contabilita_table td {

@@ -21,6 +21,11 @@ html , body {
     border: 3px solid $yellow_dark;
     position: relative;
 }
+.changeBGRow
+{
+    background-color: $yellow_light !important;
+    color: black !important;
+}
 #contabilita_table{
     ::placeholder{
         color: $white ;
@@ -34,6 +39,12 @@ html , body {
         width: 100%;
         table-layout: fixed;
         text-align: center;
+    }
+    tbody > tr
+    {
+        background-color: transparent;
+        color: white;
+        transition: background-color 1000ms linear;
     }
     td{
         word-break: break-all;
