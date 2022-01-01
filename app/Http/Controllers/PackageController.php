@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ScratchAndWinTobaccoShop;
 use App\Models\TobaccoShop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -68,12 +69,16 @@ class PackageController extends Controller
                             unset($numbersAvaiable[$positionOfElement]);
                         }
                     }
+                    //pacco registrato di gv comprati ( quindi con quantità positiva mentre quelli venduti hanno quantità negativa)
+                    $packageRegistered = $scratchAndWinToken->where('pivot.quantity','>',0)->first();
+
                     $scratchAndWinsInSelling[] = [
                         'name' => $scratchAndWinToken[0]->name,
                         'itemsInSelling' => $numberOfItemInPackageAvaiable,
                         'numbersOfPackageNotSold' => $numbersAvaiable,
-                        'tokenPackage' => $scratchAndWinToken[0]->pivot->tokenPackage,
-                        'created_at' => $scratchAndWinToken->where('pivot.quantity','>',0)->first()->pivot->created_at
+                        'tokenPackage' => $scratchAndWinToken[0]->pivot->tokenPackage, //token identificativo per ottenere il pacco di gv che ci interessa
+                        'created_at' => $packageRegistered->pivot->created_at,
+                        'idPackage' => $packageRegistered->pivot->id //id a livello di programmazione utile per eliminare l'intero pacco se l'utente necessita
                     ]; 
                 }
             }
@@ -137,8 +142,8 @@ class PackageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idTobaccoShop,$package)
     {
-        //
+        return ScratchAndWinTobaccoShop::destroy($package);
     }
 }

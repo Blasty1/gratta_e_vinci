@@ -39,5 +39,6 @@ Route::delete('/contabilita/{tobaccoShop}/employees/{employee}', [EmployeeContro
 Route::post('/contabilita/{tobaccoShop}/employee/add', [EmployeeController::class,'store'] )->middleware(['auth:sanctum', 'owner']);
 Route::post('/contabilizza/tobaccoShop/new', [TobaccoShopController::class,'store'] )->middleware(['auth:sanctum']);
 Route::post('/contabilita/{tobaccoShop}/custom', [ScratchAndWinTobaccoShopController::class,'dayChoosenByUser'])->middleware(['auth:sanctum', 'owner']);
-Route::get('/packages/{tobaccoShop}/inselling',[PackageController::class,'show'])->middleware(['auth:sanctum', 'owner']);
-Route::get('/packages/{tobaccoShop}/sold',[PackageController::class,'showPackageSold'])->middleware(['auth:sanctum', 'owner']);
+Route::get('/packages/{tobaccoShop}/inselling',[PackageController::class,'show'])->middleware(['auth:sanctum', 'ownerOrEmployee']);
+Route::get('/packages/{tobaccoShop}/sold',[PackageController::class,'showPackageSold'])->middleware(['auth:sanctum', 'ownerOrEmployee']);
+Route::delete('/package/{tobaccoShop}/{package}',[PackageController::class,'destroy'])->middleware(['auth:sanctum','owner']);

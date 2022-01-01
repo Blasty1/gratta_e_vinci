@@ -6,6 +6,7 @@
       <th scope="col">Token</th>
       <th scope="col">Biglietti Rimanenti</th>
       <th scope="col">Data Acquisto</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody ref="table">
@@ -14,6 +15,7 @@
       <td>{{ scratchAndWin.tokenPackage }}</td>
       <td>{{  Math.abs( scratchAndWin.itemsInSelling)  }}</td>
       <td>{{ moment(scratchAndWin.created_at).format('D/M/Y') }}</td>
+      <td @click="deletePackage(scratchAndWin.idPackage, key)" v-if="$parent.$parent.user_logged.id === $parent.$parent.tobacco_shop.user_id" role="button">&times</td>
 
     </tr>
   </tbody >
@@ -35,7 +37,19 @@ export default {
                 .get('/api/packages/'+ this.$parent.$parent.tobacco_shop.id + '/inselling')
                 .then(response => this.packagesInSelling = response.data)
                 .catch(error => console.log(error))
-        }
+        },
+        deletePackageFrontEnd(positionOfItemToDelete)
+        {
+            this.packagesInSelling.splice(positionOfItemToDelete,1)
+        },
+        deletePackage(idItemsToDelete, positionInArray)
+        {
+            axios
+                .delete('/api/package/' + this.$parent.$parent.tobacco_shop.id + '/' + idItemsToDelete + '')
+                .then(response => this.deletePackageFrontEnd(positionInArray))
+                .catch(errors => console.log(errors.data))
+
+        },
     },
     mounted(){
         this.getPackageSold()
