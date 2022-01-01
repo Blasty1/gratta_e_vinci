@@ -34,10 +34,10 @@ Route::post("/contabilizza/{tobaccoShop}/scratchAndWins/store" , [App\Http\Contr
 Route::get('/contabilita/{tobaccoShop}/oggi', [ScratchAndWinTobaccoShopController::class,'today'] )->middleware(['auth:sanctum', 'owner']);
 Route::get('/contabilita/{tobaccoShop}/quotidiana', [ScratchAndWinTobaccoShopController::class,'daily'] )->middleware(['auth:sanctum', 'owner']);
 Route::get('/contabilita/{tobaccoShop}/mensile', [ScratchAndWinTobaccoShopController::class,'monthly'] )->middleware(['auth:sanctum', 'owner']);
-Route::get('/contabilita/{tobaccoShop}/pacchi/venduti', [ScratchAndWinTobaccoShopController::class,'packages'] )->middleware(['auth:sanctum', 'owner']);
 Route::get('/contabilita/{tobaccoShop}/employees', [EmployeeController::class,'show'] )->middleware(['auth:sanctum', 'owner']);
 Route::delete('/contabilita/{tobaccoShop}/employees/{employee}', [EmployeeController::class,'destroy'] )->middleware(['auth:sanctum', 'owner']);
 Route::post('/contabilita/{tobaccoShop}/employee/add', [EmployeeController::class,'store'] )->middleware(['auth:sanctum', 'owner']);
 Route::post('/contabilizza/tobaccoShop/new', [TobaccoShopController::class,'store'] )->middleware(['auth:sanctum']);
 Route::post('/contabilita/{tobaccoShop}/custom', [ScratchAndWinTobaccoShopController::class,'dayChoosenByUser'])->middleware(['auth:sanctum', 'owner']);
-Route::get('/packages/inselling',[PackageController::class,'show'])->middleware(['auth:sanctum', 'owner']);
+Route::get('/packages/{tobaccoShop}/inselling',[PackageController::class,'show'])->middleware(['auth:sanctum', 'owner']);
+Route::get('/packages/{tobaccoShop}/sold',[PackageController::class,'showPackageSold']);

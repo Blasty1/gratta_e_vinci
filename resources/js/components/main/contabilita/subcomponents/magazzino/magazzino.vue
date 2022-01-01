@@ -21,7 +21,10 @@ export default {
             is_open_packages_sold : false
         }
     },
-
+    mounted()
+    {
+        this.$parent.comeBack = '/contabilizza/' + this.$parent.tobacco_shop.id
+    },
     methods : {
         showComponent : function(nameComponentToShow)
         {

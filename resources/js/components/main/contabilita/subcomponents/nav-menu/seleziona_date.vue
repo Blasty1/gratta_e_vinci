@@ -46,6 +46,11 @@ export default {
             scratchAndWinsSelected : {}
         }
     },
+    mounted()
+    {
+        this.$parent.comeBack = '/contabilizza/' + this.$parent.tobacco_shop.id
+
+    },
     watch : {
         'start.value' :function(){
             if( !this.start.value || !this.finish.value || !this.groupBy.value) return

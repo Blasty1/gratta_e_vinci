@@ -66,9 +66,59 @@ class ScratchAndWinTobaccoShopController extends Controller
         if( !$scratchAndWin ) return response()->json([
             'errors' => [ 'token' => [ 'Gratta e Vinci non trovato' ] ]
          ],404);
+
+        //token del pacco del gv
+        $tokenOfPackage = strip_tags(substr($request->token,4,7));
+
+        //numero del gratta e vinci venduto
+        $numberOfPackage = strip_tags(substr($request->token,11));
+
         // se la quantità non viene specificata significa che si vuole registrare l'acquisizione di un intero pacco
         $quantity = $request->quantity ?? $this->getNumberOfScratchAndWinInAPackage($scratchAndWin);
-        if(!$request->quantity && $this->checkfPackageIsBeenJustRegistered(strip_tags(substr($request->token,4,7))) ) return ;
+        if(!$request->quantity && $this->checkifPackageIsBeenJustRegistered($scratchAndWin->id,$tokenOfPackage) )
+        {
+            return response()->json(
+                [
+                    'errors' => ['token' => ['Pacco già registrato']]
+                ],
+                404
+                );
+        }
+        
+        
+        //se il numero non è presente
+        if(!$numberOfPackage)
+        {
+            return response()->json(
+                [
+                    'errors' => ['token' => ['Caricamento errato del GV, riprova']]
+                ],
+                404
+                );
+        }
+
+        //controlliamo se il numero del gratta e vinci è già stato inserito
+        if($request->quantity && $this->checkifNumberOfIsBeenJustRegistered($scratchAndWin->id,$tokenOfPackage,$numberOfPackage))
+        {
+                return response()->json(
+                    [
+                        'errors' => ['token' => ['Numero del GV già registrato']]
+                    ],
+                    404
+                );
+        }
+
+        //controlliamo se il numero del gratta e vinci è corretto e congruo
+        if($request->quantity && ( ( $this->getNumberOfScratchAndWinInAPackage($scratchAndWin) - 1) < (int) $numberOfPackage  ||   (int) $numberOfPackage < 0 ) )
+        {
+            return response()->json(
+                [
+                    'errors' => ['token' => ['Numero del GV errato, riprova']]
+                ],
+                404
+                );
+        }
+
         $newRecord = ScratchAndWinTobaccoShop::create(
             [
                 'tobaccoShop_id' => $tobaccoShop,
@@ -76,7 +126,7 @@ class ScratchAndWinTobaccoShopController extends Controller
                 'employee_id' => $employeeOrOwner, // who has sold the item
                 'scratchAndWin_id' => $scratchAndWin->id,
                 'tokenPackage' => strip_tags(substr($request->token,4,7)),
-                'numberOfPackage' => strip_tags(substr($request->token,12,-2))
+                'numberOfPackage' => $request->quantity ? $numberOfPackage : '' // se registriamo il pacco non ci interessa il numero del gratta e vinci inserito
             ]
         );
         return response()->json(array_merge($scratchAndWin->toArray() , array_merge([ 'pivot' => $newRecord ], ['user' => $userEmployeeInfo])));

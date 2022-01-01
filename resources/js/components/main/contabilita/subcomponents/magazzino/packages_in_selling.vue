@@ -9,11 +9,11 @@
     </tr>
   </thead>
   <tbody ref="table">
-    <tr v-for="(scratchAndWin, key) in packageInSelling" :key="key">
-      <td>{{ key }}</td>
-      <td>{{ Math.abs( scratchAndWin.total_money) }}</td>
-      <td>{{  Math.abs( scratchAndWin.total_quantity)  }}</td>
-      <td>{{ Math.abs( scratchAndWin.total_money_earned.toFixed(2)) }}</td>
+    <tr v-for="(scratchAndWin, key) in packagesInSelling" :key="key">
+      <td>{{ scratchAndWin.name }}</td>
+      <td>{{ scratchAndWin.tokenPackage }}</td>
+      <td>{{  Math.abs( scratchAndWin.itemsInSelling)  }}</td>
+      <td>{{ moment(scratchAndWin.created_at).format('D/M/Y') }}</td>
 
     </tr>
   </tbody >
@@ -32,7 +32,7 @@ export default {
         getPackageSold()
         {
             axios
-                .get('/api/packages/inselling')
+                .get('/api/packages/'+ this.$parent.$parent.tobacco_shop.id + '/inselling')
                 .then(response => this.packagesInSelling = response.data)
                 .catch(error => console.log(error))
         }

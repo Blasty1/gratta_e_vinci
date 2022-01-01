@@ -43,7 +43,7 @@ export const manipulateDatas = {
                 for( let key in errors.errors )
                 {
                     thisClass[key].error = errors.errors[key][0]
-                    thisClass[key].value = null
+                    thisClass[key].value = ''
                 }
             },
         }

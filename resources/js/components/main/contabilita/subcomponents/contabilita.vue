@@ -21,15 +21,10 @@
     </tr>
   </tbody >
   <div class="col-12 p-0 my-2 mx-0 row row_submit">
-      <div class="col-6" :class="{'color_placeholder_red' : token.error}">
-          <input ref="tokenInput" type="text" :class="{'form-control w-100' : true, 'is-invalid' : token.error }" id="validationServer01" v-model="token.value" aria-describedby="validationServer03Feedback"  :placeholder="token.error || 'Inserisci il codice seriale del GV' " required autofocus>
+      <div class="col-8" :class="{'color_placeholder_red' : token.error}">
+          <input ref="tokenInput" type="text" :class="{'form-control w-100 mt-1' : true, 'is-invalid' : token.error }" id="validationServer01" v-model="token.value" aria-describedby="validationServer03Feedback"  :placeholder="token.error || 'Inserisci il codice seriale del GV' " required autofocus>
     </div>
-      <div class="col-2" :class="{'color_placeholder_red' : quantity.error}">
-          <input type="number" :class="{'form-control w-100' : true, 'is-invalid' : quantity.error}" id="validationServer03" v-model.number="quantity.value" aria-describedby="validationServer02Feedback" required>
-            <div id="validationServer02Feedback" class="invalid-feedback">
-                {{quantity.error}}
-    </div></div>
-      <div class="col-4"><button class="w-100" @click.prevent="submitData()">Invia</button></div>
+      <div class="col-4"><button class="form-control w-100" @click.prevent="submitData()">Invia</button></div>
   </div>
   
 </table>
@@ -57,7 +52,7 @@ export default {
     },
     watch : {
         'token.value' : function(){
-            if(this.token.value.length ==  16) this.submitData()
+            if(this.token.value.length ==  14) this.submitData()
         }
     },
     methods : {
@@ -97,6 +92,11 @@ export default {
 
             this.$nextTick(() => this.$refs.tokenInput.focus())        
         },
+        handleErrors(errors)
+        {
+            this.getErrorsFromBackEnd(errors.response.data, this)
+            this.quantity.value = 1
+        },
         submitData()
         {
             this.cleanInputErrors(this.dataToSubmit)
@@ -106,7 +106,7 @@ export default {
             axios
                 .post('/api/contabilizza/' + this.$parent.tobacco_shop.id + '/scratchAndWins/store' , this.getDatasFormatted(this.dataToSubmit))
                 .then(response => (this.submitDataFrontEnd(response.data) ))
-                .catch(errors => this.getErrorsFromBackEnd(errors.response.data, this))
+                .catch(errors => this.handleErrors(errors))
         }
     },
     mounted(){

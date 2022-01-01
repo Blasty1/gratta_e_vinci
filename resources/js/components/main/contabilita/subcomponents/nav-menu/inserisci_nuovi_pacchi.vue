@@ -20,25 +20,41 @@ export default {
             dataToSubmit : ['token']
         }
     },
+    mounted()
+    {
+        this.$nextTick(() => this.$refs.tokenInput.focus())
+        this.$parent.comeBack = '/contabilizza/' + this.$parent.tobacco_shop.id
+
+    },
     methods : {
           submitDataFrontEnd()
         {
             this.token.value = ""
+            
+            this.$nextTick(() => this.$refs.tokenInput.focus()) 
 
-
+        },
+        handleError(errors)
+        {
+            this.$nextTick(() => this.$refs.tokenInput.focus()) 
+            this.getErrorsFromBackEnd(errors.response.data, this);
         },
         submitData()
         {
             this.cleanInputErrors(this.dataToSubmit)
             this.allDataIsBeenInserted(this.dataToSubmit)
-            if(this.token.value.length !=  16) this.token.error = "Reinserisci il codice"
+            if(this.token.value.length !=  14) this.token.error = "Reinserisci il codice"
 
-            if( this.thereAreErrors(this.dataToSubmit) ) return
+            if( this.thereAreErrors(this.dataToSubmit) )
+            {
+                this.$nextTick(() => this.$refs.tokenInput.focus()) 
+                return
+            }
             
             axios
                 .post('/api/contabilizza/' + this.$parent.tobacco_shop.id + '/scratchAndWins/store' , this.getDatasFormatted(this.dataToSubmit))
                 .then(response => (this.submitDataFrontEnd(response.data) ))
-                .catch(errors => this.getErrorsFromBackEnd(errors.response.data, this))
+                .catch(errors => this.handleError(errors))
         }
     }
 }

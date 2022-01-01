@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\ScratchAndWinTobaccoShop;
+use App\Models\TobaccoShop;
 use Illuminate\Support\Facades\Log;
 
 trait ScratchAndWinHandler{
@@ -22,15 +23,15 @@ trait ScratchAndWinHandler{
     {
         return round(\Config::get('scratchAndWinApp.valore_pacco') / $scratchAndWin->prize);
     }
-    function checkfPackageIsBeenJustRegistered($tokenToCheck)
+    function checkifPackageIsBeenJustRegistered($idScratchAndWin,$tokenToCheck)
     {
-        return ScratchAndWinTobaccoShop::where('tokenPackage' , $tokenToCheck)->get()->first();
+        return ScratchAndWinTobaccoShop::where('scratchAndWin_id',$idScratchAndWin)->where('tokenPackage' , $tokenToCheck)->where('quantity','>',0)->get()->first();
     }
-    function getAllPackagesNotSold()
+    function checkifNumberOfIsBeenJustRegistered($idScratchAndWin,$tokenToCheck,$numberOfPackage)
     {
-        $allScratchAndWinSold = ScratchAndWinTobaccoShop::all()->groupBy('tokenPackage');
-
+        return ScratchAndWinTobaccoShop::where('scratchAndWin_id',$idScratchAndWin)->where('tokenPackage',$tokenToCheck)->where('numberOfPackage',$numberOfPackage)->get()->first();
     }
+    
 }
 
 
