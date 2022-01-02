@@ -52,7 +52,7 @@ export default {
     },
     watch : {
         'token.value' : function(){
-            if(this.token.value.length ==  14) this.submitData()
+            if(this.token.value.length ==  16) this.submitData()
         }
     },
     methods : {

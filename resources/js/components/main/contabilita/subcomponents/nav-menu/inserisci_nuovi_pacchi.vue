@@ -43,7 +43,7 @@ export default {
         {
             this.cleanInputErrors(this.dataToSubmit)
             this.allDataIsBeenInserted(this.dataToSubmit)
-            if(this.token.value.length !=  14) this.token.error = "Reinserisci il codice"
+            if(this.token.value.length !=  16) this.token.error = "Reinserisci il codice"
 
             if( this.thereAreErrors(this.dataToSubmit) )
             {

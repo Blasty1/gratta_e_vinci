@@ -71,7 +71,7 @@ class ScratchAndWinTobaccoShopController extends Controller
         $tokenOfPackage = strip_tags(substr($request->token,4,7));
 
         //numero del gratta e vinci venduto
-        $numberOfPackage = strip_tags(substr($request->token,11));
+        $numberOfPackage = strip_tags(substr($request->token,11,-2));
 
         // se la quantità non viene specificata significa che si vuole registrare l'acquisizione di un intero pacco
         $quantity = $request->quantity ?? $this->getNumberOfScratchAndWinInAPackage($scratchAndWin);
