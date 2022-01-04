@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Models\ScratchAndWinTobaccoShop;
 use App\Models\TobaccoShop;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
 trait ScratchAndWinHandler{
@@ -34,6 +35,20 @@ trait ScratchAndWinHandler{
     function checkifNumberOfIsBeenJustRegistered($idScratchAndWin,$tokenToCheck,$numberOfPackage)
     {
         return ScratchAndWinTobaccoShop::where('scratchAndWin_id',$idScratchAndWin)->where('tokenPackage',$tokenToCheck)->where('numberOfPackage',$numberOfPackage)->get()->first();
+    }
+    public function orderByTime($first_date,$second_date)
+    {
+        try{
+            $first_date =Carbon::createFromFormat('d/m/Y',$first_date);
+            $second_date = Carbon::createFromFormat('d/m/Y',$second_date);
+        }catch(\Exception $e)
+        {
+            $first_date = Carbon::createFromFormat('m/Y',$first_date);
+            $second_date = Carbon::createFromFormat('m/Y',$second_date);
+        }
+            if ($first_date == $second_date) return ($r = 0);
+            $r = ($first_date > $second_date) ? -1: 1;
+            return $r;
     }
     
 }

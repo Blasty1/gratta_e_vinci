@@ -89,6 +89,13 @@ html , body {
         color: $white ;
     }
 }
+.width_100
+{
+    tbody
+    {
+        max-height: 70vh !important;
+    }
+}
 .boxSelezionaDate{
     flex: 1;
     color: #FFFFFF;

@@ -81,10 +81,15 @@ class PackageController extends Controller
                         'tokenPackage' => $scratchAndWinToken[0]->pivot->tokenPackage, //token identificativo per ottenere il pacco di gv che ci interessa
                         'created_at' => $packageRegistered->pivot->created_at,
                         'idPackage' => $packageRegistered->pivot->id //id a livello di programmazione utile per eliminare l'intero pacco se l'utente necessita
-                    ]; 
+                    ];
                 }
             }
         }
+        $keys = array_column($scratchAndWinsInSelling, 'itemsInSelling');
+        array_multisort($keys, SORT_ASC, $scratchAndWinsInSelling);
+            return response()->json($scratchAndWinsInSelling);
+
+        
         return response()->json($scratchAndWinsInSelling);
 
     }
@@ -93,7 +98,7 @@ class PackageController extends Controller
     public function showPackageSold($idTobaccoShop)
     {
         $scratchAndWinsTokens = TobaccoShop::find($idTobaccoShop)->scratchAndWins->groupBy(['token','pivot.tokenPackage'] );
-        $scratchAndWinsInSelling = [];
+        $scratchAndWinsSold = [];
         foreach($scratchAndWinsTokens as $scratchAndWinsToken)
         {
             foreach($scratchAndWinsToken as $scratchAndWinToken)
@@ -103,7 +108,7 @@ class PackageController extends Controller
                 
                 if($numberOfItemInPackageAvaiable == 0)
                 {
-                    $scratchAndWinsInSelling[] = [
+                    $scratchAndWinsSold[] = [
                         'name' => $scratchAndWinToken[0]->name,
                         'tokenPackage' => $scratchAndWinToken[0]->pivot->tokenPackage,
                         'created_at' => $scratchAndWinToken->where('pivot.quantity','>',0)->first()->pivot->created_at,
@@ -112,7 +117,12 @@ class PackageController extends Controller
                 }
             }
         }
-        return response()->json($scratchAndWinsInSelling);
+        $keys = array_column($scratchAndWinsSold, 'updated_at');
+        array_multisort($keys, SORT_DESC, $scratchAndWinsSold);
+            return response()->json($scratchAndWinsSold);
+
+        
+        return response()->json($scratchAndWinsSold);
     }
 
     /**

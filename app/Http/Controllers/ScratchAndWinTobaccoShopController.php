@@ -27,20 +27,7 @@ class ScratchAndWinTobaccoShopController extends Controller
         //
     }
 
-    public function orderByTime($first_date,$second_date)
-    {
-        try{
-            $first_date =Carbon::createFromFormat('d/m/Y',$first_date);
-            $second_date = Carbon::createFromFormat('d/m/Y',$second_date);
-        }catch(Exception $e)
-        {
-            $first_date = Carbon::createFromFormat('m/Y',$first_date);
-            $second_date = Carbon::createFromFormat('m/Y',$second_date);
-        }
-            if ($first_date == $second_date) return ($r = 0);
-            $r = ($first_date > $second_date) ? -1: 1;
-            return $r;
-    }
+    
 
     /**
      * Show the form for creating a new resource.

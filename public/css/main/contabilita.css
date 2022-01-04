@@ -145,6 +145,10 @@ html, body {
   color: #FFFFFF;
 }
 
+.width_100 tbody {
+  max-height: 70vh !important;
+}
+
 .boxSelezionaDate {
   -webkit-box-flex: 1;
       -ms-flex: 1;

@@ -1,5 +1,5 @@
 <template>
-       <table class="table" id="contabilita_table">
+       <table class="table width_100" id="contabilita_table">
   <thead>
     <tr>
       <th scope="col">GV Nome</th>

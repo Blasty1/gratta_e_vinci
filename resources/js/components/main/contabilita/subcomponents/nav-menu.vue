@@ -10,7 +10,21 @@
 export default {
     data(){
         return{
-          optionsToSelect : ['contabilita_oggi','contabilita_quotidiana','seleziona_date','contabilita_mensile','magazzino','inserisci_nuovi_pacchi','aggiungi_dipendenti']
+        }
+    },
+    computed:
+    {
+        'optionsToSelect' : function(){
+          let menu = ['contabilita_oggi','contabilita_quotidiana','seleziona_date','contabilita_mensile','magazzino','inserisci_nuovi_pacchi','aggiungi_dipendenti']
+          
+          /* se sei un dipendente */
+          if(this.$parent.user_logged.id !== this.$parent.tobacco_shop.user_id)
+          {
+            return ['contabilita_oggi','magazzino','inserisci_nuovi_pacchi']
+          }
+
+          return menu
+
         }
     },
     methods : {
