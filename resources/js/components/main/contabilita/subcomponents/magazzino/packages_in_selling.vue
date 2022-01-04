@@ -12,7 +12,7 @@
   <tbody ref="table">
     <tr v-for="(scratchAndWin, key) in packagesInSelling" :key="key">
       <td>{{ scratchAndWin.name }}</td>
-      <td>{{ scratchAndWin.tokenPackage }}</td>
+      <td><a tabindex="0" class="" role="button"  data-toggle="popover" data-trigger="focus" data-placement="top" title="Numeri Biglietti Rimanenti" :data-content="Object.values(scratchAndWin.numbersOfPackageNotSold).join(' - ')">{{scratchAndWin.tokenPackage}}</a></td>
       <td>{{  Math.abs( scratchAndWin.itemsInSelling)  }}</td>
       <td>{{ moment(scratchAndWin.created_at).format('D/M/Y') }}</td>
       <td @click="deletePackage(scratchAndWin.idPackage, key)" v-if="$parent.$parent.user_logged.id === $parent.$parent.tobacco_shop.user_id" role="button">&times</td>
@@ -50,9 +50,23 @@ export default {
                 .catch(errors => console.log(errors.data))
 
         },
+       
     },
     mounted(){
         this.getPackageSold()
+        $('.popover-dismiss').popover({
+          trigger: 'focus'  
+      })
+        
+    },
+    updated()
+    {
+      $(function () {
+            $('[data-toggle="popover"]').popover({
+                container : 'body'
+            })
+        })
     }
+    
 }
 </script>

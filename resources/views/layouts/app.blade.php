@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Gestionale</title>
-
+        <link rel="stylesheet" href="/css/main/popover.css">
      <link href="/css/app.css" rel="stylesheet">
 
 
@@ -22,6 +22,5 @@
 
 
     <script src="/js/app.js"></script>
-
     </body>
 </html>
