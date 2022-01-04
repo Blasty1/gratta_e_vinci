@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\ScratchAndWinTobaccoShop;
 use App\Models\TobaccoShop;
+use App\Traits\ScratchAndWinHandler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class PackageController extends Controller
 {
+    use ScratchAndWinHandler;
     /**
      * Display a listing of the resource.
      *
@@ -55,7 +57,7 @@ class PackageController extends Controller
             foreach($scratchAndWinsToken as $scratchAndWinToken)
             {
 
-                $numberOfItemInPackageTotale = config('scratchAndWinApp.valore_pacco') / $scratchAndWinToken[0]->prize;
+                $numberOfItemInPackageTotale =$this->getNumberOfScratchAndWinInAPackage($scratchAndWinToken[0]);
                 $numberOfItemInPackageAvaiable = $scratchAndWinToken->sum('pivot.quantity');
                 
                 if($numberOfItemInPackageAvaiable > 0)

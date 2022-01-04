@@ -153,6 +153,7 @@ return [
 
     'guadagno' => 0.08,
     'valore_pacco' => 300,
+    'valore_pacco_1_2_3' => 150, //gratta e vinci che costano 1,2 o 3 euro e ogni stecca non vale 300 bensi 150
 ];
 
 

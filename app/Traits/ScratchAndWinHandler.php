@@ -21,6 +21,10 @@ trait ScratchAndWinHandler{
     }
     function getNumberOfScratchAndWinInAPackage($scratchAndWin)
     {
+        if( $scratchAndWin->prize <= 3)
+        {
+            return \Config::get('scratchAndWinApp.valore_pacco_1_2_3') / $scratchAndWin->prize;
+        }
         return round(\Config::get('scratchAndWinApp.valore_pacco') / $scratchAndWin->prize);
     }
     function checkifPackageIsBeenJustRegistered($idScratchAndWin,$tokenToCheck)
