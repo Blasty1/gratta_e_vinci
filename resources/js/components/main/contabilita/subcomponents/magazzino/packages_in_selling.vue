@@ -6,7 +6,7 @@
       <th scope="col">Token</th>
       <th scope="col">Biglietti Rimanenti</th>
       <th scope="col">Data Acquisto</th>
-      <th scope="col"></th>
+      <th scope="col" v-if="$parent.$parent.user_logged.id === $parent.$parent.tobacco_shop.user_id"></th>
     </tr>
   </thead>
   <tbody ref="table">
