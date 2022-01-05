@@ -62,12 +62,22 @@ class PackageController extends Controller
                 
                 if($numberOfItemInPackageAvaiable > 0)
                 {
-                    $numbersAvaiable = range(0, $numberOfItemInPackageTotale - 1);
+                   
                     foreach($scratchAndWinToken as $scratchAndWin)
                     {
-                        if(in_array($scratchAndWin->pivot->numberOfPackage,$numbersAvaiable))
+                        $numbersAvaiable = range(0, (int)($numberOfItemInPackageTotale - 1));
+                        
+                        //se il numero è appunto un numero nel database e se non è nullo allora lo converto e lo elimino dalla serie di numeri che ho per capire quelli ancora disponibili alla vendita
+                        if($scratchAndWin->pivot->numberOfPackage === null && !is_numeric($scratchAndWin->pivot->numberOfPackage))
                         {
-                            $positionOfElement = array_search($scratchAndWin->pivot->numberOfPackage,$numbersAvaiable);
+                            continue;
+                        }
+                        $numberOfPackage = (int) $scratchAndWin->pivot->numberOfPackage;
+                        
+                        
+                        if(in_array($numberOfPackage,$numbersAvaiable,true))
+                        {
+                            $positionOfElement = array_search($numberOfPackage,$numbersAvaiable);
                             unset($numbersAvaiable[$positionOfElement]);
                         }
                     }

@@ -17,7 +17,7 @@ class TobaccoShop extends Model
     // $time refers to a timestamp that indicates the range where find items sold
     public function scratchAndWins($time=null)
     {
-        $relationShip = $this->belongsToMany(ScratchAndWin::class,'scratch_and_win_tobacco_shop','tobaccoShop_id','scratchAndWin_id')->withPivot('employee_id','quantity','id','created_at','tokenPackage');
+        $relationShip = $this->belongsToMany(ScratchAndWin::class,'scratch_and_win_tobacco_shop','tobaccoShop_id','scratchAndWin_id')->withPivot('employee_id','quantity','id','created_at','tokenPackage','numberOfPackage');
         if( $time ) return $relationShip->wherePivot('created_at','>=',$time);
         return $relationShip;
     }
