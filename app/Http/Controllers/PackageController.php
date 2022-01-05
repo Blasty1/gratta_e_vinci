@@ -60,22 +60,21 @@ class PackageController extends Controller
                 $numberOfItemInPackageTotale =$this->getNumberOfScratchAndWinInAPackage($scratchAndWinToken[0]);
                 $numberOfItemInPackageAvaiable = $scratchAndWinToken->sum('pivot.quantity');
                 
+                $numbersAvaiable = range(0, (int)($numberOfItemInPackageTotale - 1));
+
                 if($numberOfItemInPackageAvaiable > 0)
                 {
-                   
                     foreach($scratchAndWinToken as $scratchAndWin)
                     {
-                        $numbersAvaiable = range(0, (int)($numberOfItemInPackageTotale - 1));
-                        
-                        //se il numero è appunto un numero nel database e se non è nullo allora lo converto e lo elimino dalla serie di numeri che ho per capire quelli ancora disponibili alla vendita
-                        if($scratchAndWin->pivot->numberOfPackage === null && !is_numeric($scratchAndWin->pivot->numberOfPackage))
+                        //se il numero è appunto un numero nel database e se non è nullo allora lo converto e lo elimino dalla serie di numeri che ho per capire quelli ancora disponibili all vendita
+                        if(!is_numeric($scratchAndWin->pivot->numberOfPackage))
                         {
                             continue;
                         }
                         $numberOfPackage = (int) $scratchAndWin->pivot->numberOfPackage;
+                    
                         
-                        
-                        if(in_array($numberOfPackage,$numbersAvaiable,true))
+                        if(in_array($numberOfPackage,$numbersAvaiable))
                         {
                             $positionOfElement = array_search($numberOfPackage,$numbersAvaiable);
                             unset($numbersAvaiable[$positionOfElement]);
@@ -83,7 +82,6 @@ class PackageController extends Controller
                     }
                     //pacco registrato di gv comprati ( quindi con quantità positiva mentre quelli venduti hanno quantità negativa)
                     $packageRegistered = $scratchAndWinToken->where('pivot.quantity','>',0)->first();
-
                     $scratchAndWinsInSelling[] = [
                         'name' => $scratchAndWinToken[0]->name,
                         'itemsInSelling' => $numberOfItemInPackageAvaiable,
@@ -97,10 +95,9 @@ class PackageController extends Controller
         }
         $keys = array_column($scratchAndWinsInSelling, 'itemsInSelling');
         array_multisort($keys, SORT_ASC, $scratchAndWinsInSelling);
-            return response()->json($scratchAndWinsInSelling);
 
-        
         return response()->json($scratchAndWinsInSelling);
+
 
     }
 
