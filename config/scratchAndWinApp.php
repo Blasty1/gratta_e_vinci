@@ -150,6 +150,11 @@ return [
         'token' => '3310',
         'prize' => 3
     ],
+    [
+        'name' => 'Speed Cash',
+        'token' => '3040',
+        'prize' => 5
+    ],
 
     'guadagno' => 0.08,
     'valore_pacco' => 300,

@@ -7,6 +7,7 @@
       <th scope="col">Biglietti Rimanenti</th>
       <th scope="col">Data Acquisto</th>
       <th scope="col" v-if="$parent.$parent.user_logged.id === $parent.$parent.tobacco_shop.user_id"></th>
+      <th scope="col" v-if="$parent.$parent.user_logged.id === $parent.$parent.tobacco_shop.user_id"></th>
     </tr>
   </thead>
   <tbody ref="table">
@@ -15,6 +16,7 @@
       <td><a tabindex="0" class="" role="button"  data-toggle="popover" data-trigger="focus" data-placement="top" title="Numeri Biglietti Rimanenti" :data-content="Object.values(scratchAndWin.numbersOfPackageNotSold).join(' - ')">{{scratchAndWin.tokenPackage}}</a></td>
       <td>{{  Math.abs( scratchAndWin.itemsInSelling)  }}</td>
       <td>{{ moment(scratchAndWin.created_at).format('D/M/Y') }}</td>
+      <td @click="completePackage(scratchAndWin.idPackage,key)" v-if="$parent.$parent.user_logged.id === $parent.$parent.tobacco_shop.user_id" role="button">&#10003</td>
       <td @click="deletePackage(scratchAndWin.idPackage, key)" v-if="$parent.$parent.user_logged.id === $parent.$parent.tobacco_shop.user_id" role="button">&times</td>
 
     </tr>
@@ -37,6 +39,11 @@ export default {
                 .get('/api/packages/'+ this.$parent.$parent.tobacco_shop.id + '/inselling')
                 .then(response => this.packagesInSelling = response.data)
                 .catch(error => console.log(error))
+        },
+        completePackage(idItem, positionInArray)
+        {
+            axios
+                .post('/api/packages/' + this.$parent.$parent.tobacco_shop.id + '/' +  idItem)
         },
         deletePackageFrontEnd(positionOfItemToDelete)
         {
