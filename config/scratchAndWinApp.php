@@ -155,6 +155,11 @@ return [
         'token' => '3040',
         'prize' => 5
     ],
+    [
+        'name' => 'Eldorado',
+        'token' => '3041',
+        'prize' => 3
+    ],
 
     'guadagno' => 0.08,
     'valore_pacco' => 300,
