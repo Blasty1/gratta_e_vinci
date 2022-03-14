@@ -160,6 +160,11 @@ return [
         'token' => '3041',
         'prize' => 3
     ],
+    [
+        'name' => "Sfinge d'oro",
+        'token' => '3043',
+        'prize' => 10
+    ],
 
     'guadagno' => 0.08,
     'valore_pacco' => 300,
