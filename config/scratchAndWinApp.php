@@ -71,8 +71,8 @@ return [
         'prize' => 3
     ],
     [
-        'name' => 'Fai Scopa' ,
-        'token' => '3014',
+        'name' => 'Fai Scopa New' ,
+        'token' => '3050',
         'prize' => 2
     ],
     [
