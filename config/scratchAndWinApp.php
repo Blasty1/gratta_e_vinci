@@ -107,7 +107,7 @@ return [
     ],
     [
         'name' => 'Numeri fortunati',
-        'token' => '3030',
+        'token' => '3049',
         'prize' => 3
     ],
     [
