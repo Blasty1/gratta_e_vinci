@@ -165,6 +165,11 @@ return [
         'token' => '3043',
         'prize' => 10
     ],
+    [
+        'name' => "Frutti Ricchi",
+        'token' => '3044',
+        'prize' => 2
+    ],
 
     'guadagno' => 0.08,
     'valore_pacco' => 300,
