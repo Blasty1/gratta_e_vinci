@@ -2,7 +2,7 @@
 return [
     [
         'name' => 'Mega Miliardario' ,
-        'token' => '3016',
+        'token' => '3046',
         'prize' => 10
     ],
     [
@@ -169,6 +169,11 @@ return [
         'name' => "Frutti Ricchi",
         'token' => '3044',
         'prize' => 2
+    ],
+    [
+        'name' => "100x",
+        'token' => '3313',
+        'prize' => 20
     ],
 
     'guadagno' => 0.08,
