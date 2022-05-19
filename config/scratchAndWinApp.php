@@ -175,6 +175,11 @@ return [
         'token' => '3313',
         'prize' => 20
     ],
+    [
+        'name' => "500 Special",
+        'token' => '3048',
+        'prize' => 5
+    ],
 
     'guadagno' => 0.08,
     'valore_pacco' => 300,
