@@ -102,7 +102,7 @@ return [
     ],
     [
         'name' => 'Maxi Miliardario',
-        'token' => '3037',
+        'token' => '3047',
         'prize' => 20
     ],
     [
