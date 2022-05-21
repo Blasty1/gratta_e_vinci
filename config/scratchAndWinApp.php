@@ -67,7 +67,7 @@ return [
     ],
     [
         'name' => 'Super Sette e Mezzo' ,
-        'token' => '3032',
+        'token' => '3052',
         'prize' => 3
     ],
     [
