@@ -180,6 +180,11 @@ return [
         'token' => '3048',
         'prize' => 5
     ],
+    [
+        'name' => 'CruciJolly' ,
+        'token' => '3058',
+        'prize' => 3
+    ],
 
     'guadagno' => 0.08,
     'valore_pacco' => 300,
