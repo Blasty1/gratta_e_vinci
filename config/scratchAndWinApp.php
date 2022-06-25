@@ -37,7 +37,7 @@ return [
     ],
     [
         'name' => 'Miliardario 5' ,
-        'token' => '3035',
+        'token' => '3045',
         'prize' => 5
     ],
     [
