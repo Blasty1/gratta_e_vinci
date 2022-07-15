@@ -97,7 +97,7 @@ return [
     ],
     [
         'name' => 'monetine fortunate',
-        'token' => '3025',
+        'token' => '3042',
         'prize' => 1
     ],
     [
@@ -184,6 +184,11 @@ return [
         'name' => 'CruciJolly' ,
         'token' => '3058',
         'prize' => 3
+    ],
+    [
+        'name' => 'Il re vincente' ,
+        'token' => '3059',
+        'prize' => 10
     ],
 
     'guadagno' => 0.08,
