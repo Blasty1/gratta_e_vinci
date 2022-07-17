@@ -14,7 +14,7 @@
                 <select name="giorni_mesi_settimane" v-model="groupBy.value">
                     <option value="d">Giorno</option>
                     <option value="W">Settimana</option>
-                    <option value="M">Mese</option>
+                    <option value="m">Mese</option>
                 </select>
             </div>
         </div>
