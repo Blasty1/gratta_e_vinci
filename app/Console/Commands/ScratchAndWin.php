@@ -20,7 +20,7 @@ class ScratchAndWin extends Command
      *
      * @var string
      */
-    protected $description = 'Aggiorna il listino dei gratta e vinci disponibili';
+    protected $description = 'Aggiorna il listino dei gratta e vinci disponibil';
 
     /**
      * Create a new command instance.
