@@ -167,7 +167,9 @@ class ScratchAndWinTobaccoShopController extends Controller
      */
     public function daily($tobaccoShop)
     {  
-        $scratchAndWins = TobaccoShop::find($tobaccoShop)->scratchAndWins(Carbon::today()->month)->wherePivot('quantity' ,'<', 0)->get()->groupBy(function($scratchAndWin){
+        ini_set('memory_limit', '4095M'); // we have a lot of data to process, so we expand the memory limit
+
+        $scratchAndWins = TobaccoShop::find($tobaccoShop)->scratchAndWins(Carbon::today()->month)->wherePivot('quantity' ,'<', 0)->wherePivot("created_at",">",Carbon::today()->subDays(\Config::get('scratchAndWinApp.MAX_DAY_TO_SHOW')))->get()->groupBy(function($scratchAndWin){
             return $scratchAndWin->pivot->created_at->format('d/m/Y'); // grouping by months
         
         });
@@ -196,8 +198,11 @@ class ScratchAndWinTobaccoShopController extends Controller
      */
     public function monthly($tobaccoShop)
     {  
-        $scratchAndWins = TobaccoShop::find($tobaccoShop)->scratchAndWins(Carbon::today()->year)->wherePivot('quantity' ,'<', 0)->get()->groupBy(function($scratchAndWin){
-            return $scratchAndWin->pivot->created_at->format('m/Y'); // grouping by year
+        ini_set('memory_limit', '4095M'); // we have a lot of data to process, so we expand the memory limit
+
+        $scratchAndWins = TobaccoShop::find($tobaccoShop)->scratchAndWins(Carbon::today()->year)->wherePivot('quantity' ,'<', 0)->wherePivot('created_at','>',Carbon::today()->subMonth(\Config::get('scratchAndWinApp.MAX_MONTH_TO_SHOW')))->get()->groupBy(function($scratchAndWin){
+    
+            return $scratchAndWin->pivot->created_at->format('m/Y'); // grouping by year and month
         
         });
         foreach( $scratchAndWins as $key => $scratchAndWinOne)
@@ -206,11 +211,12 @@ class ScratchAndWinTobaccoShopController extends Controller
             $scratchAndWinOne['total_money'] = $this->sumForEachItems($scratchAndWinOne);
             $scratchAndWinOne['total_money_earned'] = $scratchAndWinOne['total_money'] * \Config::get('scratchAndWinApp.guadagno');
         }
-        $ordered = $scratchAndWins->toArray();
-        uksort($ordered ,function($first_date,$second_date){
+        $scratchAndWins = $scratchAndWins->toArray();
+        
+        uksort($scratchAndWins ,function($first_date,$second_date){
             return $this->orderByTime($first_date,$second_date);
         });
-        return $ordered;
+        return $scratchAndWins;
     }
 
 
@@ -222,9 +228,10 @@ class ScratchAndWinTobaccoShopController extends Controller
      */
     public function dayChoosenByUser($tobaccoShop, Request $request)
     { 
+        ini_set('memory_limit', '4095M'); // we have a lot of data to process, so we expand the memory limit
         $request->validate([
             'groupBy' => [
-                Rule::in(['d', 'W','M']),
+                Rule::in(['d', 'W','m']),
                 'required'
             ],
             'start' => 'required|date',
@@ -238,9 +245,8 @@ class ScratchAndWinTobaccoShopController extends Controller
                                                                                $dateFormatted = $scratchAndWin->pivot->created_at->format($groupBy);
                                                                                if($groupBy == 'W') return $scratchAndWin->pivot->created_at->startOfWeek()->format('d/m/Y') . ' to ' .  $scratchAndWin->pivot->created_at->endOfWeek()->format('d/m/Y') ;
                                                                                if($groupBy == 'd') return $dateFormatted . '/' . $scratchAndWin->pivot->created_at->format('m/Y') ;
-                                                                               if($groupBy == 'M') return $dateFormatted;
+                                                                               if($groupBy == 'm') return $dateFormatted . '/' . $scratchAndWin->pivot->created_at->format('Y') ;
                                                                             });
-    
         foreach( $scratchAndWins as $key => $scratchAndWinOne)
         {
             $scratchAndWinOne['total_quantity'] = $scratchAndWinOne->sum('pivot.quantity');
@@ -248,7 +254,8 @@ class ScratchAndWinTobaccoShopController extends Controller
             $scratchAndWinOne['total_money_earned'] = $scratchAndWinOne['total_money'] * \Config::get('scratchAndWinApp.guadagno');
         }
         $ordered = $scratchAndWins->toArray();
-        uksort($ordered ,function($first_date,$second_date){
+        uksort($ordered ,function($first_date,$second_date)
+        {
             return $this->orderByTime(\Str::of($first_date)->explode(' ')[0],\Str::of($second_date)->explode(' ')[0]);
         });
         return $ordered;
