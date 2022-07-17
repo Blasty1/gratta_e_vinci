@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Console\Commands\ScratchAndWin;
+use App\Models\Employee;
 use App\Models\ScratchAndWinTobaccoShop;
 use App\Models\TobaccoShop;
 use App\Traits\ScratchAndWinHandler;
@@ -50,38 +52,32 @@ class PackageController extends Controller
      */
     public function show($idTobaccoShop)
     {
-        $scratchAndWinsTokens = TobaccoShop::find($idTobaccoShop)->scratchAndWins->groupBy(['token','pivot.tokenPackage'] );
+        $scratchAndWinsTokens = TobaccoShop::find($idTobaccoShop)->scratchAndWins->groupBy(['token', 'pivot.tokenPackage']);
         $scratchAndWinsInSelling = [];
-        foreach($scratchAndWinsTokens as $scratchAndWinsToken)
-        {
-            foreach($scratchAndWinsToken as $scratchAndWinToken)
-            {
+        foreach ($scratchAndWinsTokens as $scratchAndWinsToken) {
+            foreach ($scratchAndWinsToken as $scratchAndWinToken) {
 
-                $numberOfItemInPackageTotale =$this->getNumberOfScratchAndWinInAPackage($scratchAndWinToken[0]);
+                $numberOfItemInPackageTotale = $this->getNumberOfScratchAndWinInAPackage($scratchAndWinToken[0]);
                 $numberOfItemInPackageAvaiable = $scratchAndWinToken->sum('pivot.quantity');
-                
+
                 $numbersAvaiable = range(0, (int)($numberOfItemInPackageTotale - 1));
 
-                if($numberOfItemInPackageAvaiable > 0)
-                {
-                    foreach($scratchAndWinToken as $scratchAndWin)
-                    {
+                if ($numberOfItemInPackageAvaiable > 0) {
+                    foreach ($scratchAndWinToken as $scratchAndWin) {
                         //se il numero è appunto un numero nel database e se non è nullo allora lo converto e lo elimino dalla serie di numeri che ho per capire quelli ancora disponibili all vendita
-                        if(!is_numeric($scratchAndWin->pivot->numberOfPackage))
-                        {
+                        if (!is_numeric($scratchAndWin->pivot->numberOfPackage)) {
                             continue;
                         }
                         $numberOfPackage = (int) $scratchAndWin->pivot->numberOfPackage;
-                    
-                        
-                        if(in_array($numberOfPackage,$numbersAvaiable))
-                        {
-                            $positionOfElement = array_search($numberOfPackage,$numbersAvaiable);
+
+
+                        if (in_array($numberOfPackage, $numbersAvaiable)) {
+                            $positionOfElement = array_search($numberOfPackage, $numbersAvaiable);
                             unset($numbersAvaiable[$positionOfElement]);
                         }
                     }
                     //pacco registrato di gv comprati ( quindi con quantità positiva mentre quelli venduti hanno quantità negativa)
-                    $packageRegistered = $scratchAndWinToken->where('pivot.quantity','>',0)->first();
+                    $packageRegistered = $scratchAndWinToken->where('pivot.quantity', '>', 0)->first();
                     $scratchAndWinsInSelling[] = [
                         'name' => $scratchAndWinToken[0]->name,
                         'itemsInSelling' => $numberOfItemInPackageAvaiable,
@@ -97,38 +93,31 @@ class PackageController extends Controller
         array_multisort($keys, SORT_ASC, $scratchAndWinsInSelling);
 
         return response()->json($scratchAndWinsInSelling);
-
-
     }
 
 
     public function showPackageSold($idTobaccoShop)
     {
-        $scratchAndWinsTokens = TobaccoShop::find($idTobaccoShop)->scratchAndWins->groupBy(['token','pivot.tokenPackage'] );
+        $scratchAndWinsTokens = TobaccoShop::find($idTobaccoShop)->scratchAndWins->groupBy(['token', 'pivot.tokenPackage']);
         $scratchAndWinsSold = [];
-        foreach($scratchAndWinsTokens as $scratchAndWinsToken)
-        {
-            foreach($scratchAndWinsToken as $scratchAndWinToken)
-            {
-            
+        foreach ($scratchAndWinsTokens as $scratchAndWinsToken) {
+            foreach ($scratchAndWinsToken as $scratchAndWinToken) {
+
                 $numberOfItemInPackageAvaiable = $scratchAndWinToken->sum('pivot.quantity');
-                
-                if($numberOfItemInPackageAvaiable == 0)
-                {
+
+                if ($numberOfItemInPackageAvaiable == 0) {
                     $scratchAndWinsSold[] = [
                         'name' => $scratchAndWinToken[0]->name,
                         'tokenPackage' => $scratchAndWinToken[0]->pivot->tokenPackage,
-                        'created_at' => $scratchAndWinToken->where('pivot.quantity','>',0)->first()->pivot->created_at,
+                        'created_at' => $scratchAndWinToken->where('pivot.quantity', '>', 0)->first()->pivot->created_at,
                         'updated_at' => $scratchAndWinToken->sortByDesc('pivot.created_at')->first()->pivot->created_at,
-                    ]; 
+                    ];
                 }
             }
         }
         $keys = array_column($scratchAndWinsSold, 'updated_at');
         array_multisort($keys, SORT_DESC, $scratchAndWinsSold);
-            return response()->json($scratchAndWinsSold);
 
-        
         return response()->json($scratchAndWinsSold);
     }
 
@@ -144,15 +133,50 @@ class PackageController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * automatically set sold scratch and wins not registered or lost
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(int $idTobaccoShop, $package)
     {
-        //
+        if (strlen($package) != 7 || !ctype_digit($package)) {
+            return response()->json("Errore,token non corretto, riprovare", 402);
+        }
+        $tobaccoShop = TobaccoShop::find($idTobaccoShop);
+        $scratchAndWinsToken = $tobaccoShop->scratchAndWins()->wherePivot('tokenPackage', $package)->get();
+        $numberOfItemInPackageTotale = $this->getNumberOfScratchAndWinInAPackage($scratchAndWinsToken[0]);
+        $numbersAvaiable = range(0, (int)($numberOfItemInPackageTotale - 1));
+
+        foreach ($scratchAndWinsToken as $scratchAndWin) {
+
+            //se il numero è appunto un numero nel database e se non è nullo allora lo converto e lo elimino dalla serie di numeri che ho per capire quelli ancora disponibili all vendita
+            if (!is_numeric($scratchAndWin->pivot->numberOfPackage)) {
+                continue;
+            }
+            $numberOfPackage = (int) $scratchAndWin->pivot->numberOfPackage;
+
+
+            if (in_array($numberOfPackage, $numbersAvaiable)) {
+                $positionOfElement = array_search($numberOfPackage, $numbersAvaiable);
+                unset($numbersAvaiable[$positionOfElement]);
+            }
+        }
+        foreach ($numbersAvaiable as $numberAvaiable) {
+            ScratchAndWinTobaccoShop::insert(
+                [
+                    'tobaccoShop_id' => $idTobaccoShop,
+                    'quantity' => -1,
+                    'employee_id' => null, // who has sold the item
+                    'scratchAndWin_id' => $scratchAndWinsToken[0]->id,
+                    'tokenPackage' => $package,
+                    'numberOfPackage' => $numberAvaiable // se registriamo il pacco non ci interessa il numero del gratta e vinci inserito
+                ]
+
+            );
+        }
+        return 1;
     }
 
     /**
@@ -161,7 +185,7 @@ class PackageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($idTobaccoShop,$package)
+    public function destroy($idTobaccoShop, $package)
     {
         return ScratchAndWinTobaccoShop::destroy($package);
     }
