@@ -74,7 +74,7 @@ html , body {
             color: $black;
         }
     }
-    .col-4, .col-2 ,.col-6 {
+    .col-4, .col-2 ,.col-6 , .col-5{
         padding: 0.2rem;
     }
 }
@@ -123,6 +123,20 @@ html , body {
         tbody{
             max-height: 50vh !important;
         }
+}
+
+.chart_modal
+{
+    background-color: $blue;
+    color: $black;
+    button {
+        border-color: transparent;
+        color: $white;
+        &:hover
+        {
+            color: #FFFFFF;
+        }
+    }
 }
 // Small devices (landscape phones, less than 768px)
 @media (max-width: 767.98px) { 

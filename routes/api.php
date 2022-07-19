@@ -42,3 +42,4 @@ Route::post('/contabilita/{tobaccoShop}/custom', [ScratchAndWinTobaccoShopContro
 Route::get('/packages/{tobaccoShop}/inselling',[PackageController::class,'show'])->middleware(['auth:sanctum', 'ownerOrEmployee']);
 Route::get('/packages/{tobaccoShop}/sold',[PackageController::class,'showPackageSold'])->middleware(['auth:sanctum', 'owner']);
 Route::delete('/package/{tobaccoShop}/{package}',[PackageController::class,'destroy'])->middleware(['auth:sanctum','owner']);
+Route::get('/packages/{tobaccoShop}/{package}/complete',[PackageController::class,'update'])->middleware(['auth:sanctum','owner']);
