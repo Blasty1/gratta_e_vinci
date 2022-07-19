@@ -28,8 +28,7 @@ class ownerOrEmployee
             $owner = $request->tobaccoShop;
 
         }
-
-        if( $owner->id != $idUser && !$owner->employees($idUser)) return redirect()->route('dashboard');
+        if( $owner->user_id != $idUser && !count($owner->employees($idUser))) return redirect()->route('dashboard');
         return $next($request);
     }
 }
