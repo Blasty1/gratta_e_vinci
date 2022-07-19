@@ -13,7 +13,7 @@
   <tbody ref="table">
     <tr v-for="(scratchAndWin, index) in scratchAndWinSold" :key="index"  :class="{ 'itemsExceptFirst' :  index != 0, 'changeBGRow' : index <= newItem.length ? newItem[index] : false }" >
       <td scope="row">{{ scratchAndWin.name}}</td>
-      <td>{{ Math.abs( scratchAndWin.prize * scratchAndWin.pivot.quantity) }}</td>
+      <td>{{ Math.abs( scratchAndWin.prize * scratchAndWin.pivot.quantity) }} &#8364;</td>
       <td>{{  Math.abs(scratchAndWin.pivot.quantity)  }}</td>
       <td>{{ ( scratchAndWin.user &&  scratchAndWin.user.name ) || 'Gestore' }}</td>
       <td>{{ moment(scratchAndWin.pivot.created_at).format('LT')  }}</td>

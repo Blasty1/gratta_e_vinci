@@ -11,23 +11,23 @@
         <tbody ref="table">
             <tr v-for="(scratchAndWin, key) in scratchAndWinsSold" :key="key">
                 <td>{{ key }}</td>
-                <td>{{ Math.abs(scratchAndWin.total_money) }}</td>
-                <td>{{ Math.abs(scratchAndWin.total_quantity) }}</td>
+                <td>{{ Math.abs(scratchAndWin.total_money) }} 	&#8364;</td>
+                <td>{{ Math.abs(scratchAndWin.total_quantity) }} 	</td>
                 <td>
-                    {{ Math.abs(scratchAndWin.total_money_earned.toFixed(2)) }}
+                    {{ Math.abs(scratchAndWin.total_money_earned.toFixed(2)) }}	&#8364;
                 </td>
             </tr>
         </tbody>
         <div class="col-12 p-0 my-2 mx-0 row row_submit">
             <div class="col-5">
                 <button type="text" class="form-control w-100">
-                    Totale Vendite : {{ this.getTotalSold() }}
+                    Totale Vendite : {{ this.getTotalSold() }} &#8364;
                 </button>
             </div>
             <div class="col-5">
                 <button type="text" class="form-control w-100">
                     Guadagno Totale :
-                    {{ (this.getTotalSold() * 0.08).toFixed(2) }}
+                    {{ (this.getTotalSold() * 0.08).toFixed(2) }} &#8364;
                 </button>
             </div>
             <div class="col-2">
