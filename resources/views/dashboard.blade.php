@@ -7,7 +7,7 @@
                     <a class="nav-link active "  href="#home">{{ $user->name }}</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link"  href="/signIn" role="tab">Impostazioni</a>
+                    <a class="nav-link"  href="/impostazioni" role="tab">Impostazioni</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link"  href="/user/logout" role="tab">Esci</a>

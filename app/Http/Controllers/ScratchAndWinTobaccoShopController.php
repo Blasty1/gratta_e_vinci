@@ -150,13 +150,14 @@ class ScratchAndWinTobaccoShopController extends Controller
     public function today($tobaccoShop)
     {
         $scratchAndWins = TobaccoShop::find($tobaccoShop)->scratchAndWins(Carbon::today())->wherePivot('quantity' ,'<', 0)->get()->groupBy('name');
-        foreach( $scratchAndWins as $scratchAndWin)
+        $stats = [];
+        foreach( $scratchAndWins as $key => $scratchAndWin)
         {           
-            $scratchAndWin['total_quantity'] = $scratchAndWin->sum('pivot.quantity');
-            $scratchAndWin['total_money'] = $scratchAndWin['total_quantity'] * $scratchAndWin[0]->prize;
-            $scratchAndWin['total_money_earned'] = $scratchAndWin['total_money'] * \Config::get('scratchAndWinApp.guadagno');
+            $stats[$key]['total_quantity'] = $scratchAndWin->sum('pivot.quantity');
+            $stats[$key]['total_money'] = $stats[$key]['total_quantity'] * $scratchAndWin[0]->prize;
+            $stats[$key]['total_money_earned'] = $stats[$key]['total_money'] * \Config::get('scratchAndWinApp.guadagno');
         }
-        return $scratchAndWins;
+        return $stats;
     }
 
     /**
@@ -167,25 +168,23 @@ class ScratchAndWinTobaccoShopController extends Controller
      */
     public function daily($tobaccoShop)
     {  
-        ini_set('memory_limit', '4095M'); // we have a lot of data to process, so we expand the memory limit
 
         $scratchAndWins = TobaccoShop::find($tobaccoShop)->scratchAndWins(Carbon::today()->month)->wherePivot('quantity' ,'<', 0)->wherePivot("created_at",">",Carbon::today()->subDays(\Config::get('scratchAndWinApp.MAX_DAY_TO_SHOW')))->get()->groupBy(function($scratchAndWin){
             return $scratchAndWin->pivot->created_at->format('d/m/Y'); // grouping by months
         
         });
+        $stats = [];
         foreach( $scratchAndWins as $key => $scratchAndWinOne)
         {
-            $scratchAndWinOne['total_quantity'] = $scratchAndWinOne->sum('pivot.quantity');
-            $scratchAndWinOne['total_money'] = $this->sumForEachItems($scratchAndWinOne);
-            $scratchAndWinOne['total_money_earned'] = $scratchAndWinOne['total_money'] * \Config::get('scratchAndWinApp.guadagno');
-            
+            $stats[$key]['total_quantity'] = $scratchAndWinOne->sum('pivot.quantity');
+            $stats[$key]['total_money'] = $this->sumForEachItems($scratchAndWinOne);
+            $stats[$key]['total_money_earned'] = $stats[$key]['total_money'] * \Config::get('scratchAndWinApp.guadagno');
             
         }
-        $ordered = $scratchAndWins->toArray();
-        uksort($ordered ,function($first_date,$second_date){
+        uksort($stats ,function($first_date,$second_date){
             return $this->orderByTime($first_date,$second_date);
         });
-        return $ordered;
+        return $stats;
     }
 
 
@@ -198,8 +197,6 @@ class ScratchAndWinTobaccoShopController extends Controller
      */
     public function monthly($tobaccoShop)
     {  
-        ini_set('memory_limit', '4095M'); // we have a lot of data to process, so we expand the memory limit
-
         $scratchAndWins = TobaccoShop::find($tobaccoShop)->scratchAndWins(Carbon::today()->year)->wherePivot('quantity' ,'<', 0)->wherePivot('created_at','>',Carbon::today()->subMonth(\Config::get('scratchAndWinApp.MAX_MONTH_TO_SHOW')))->get()->groupBy(function($scratchAndWin){
     
             return $scratchAndWin->pivot->created_at->format('m/Y'); // grouping by year and month
@@ -207,16 +204,15 @@ class ScratchAndWinTobaccoShopController extends Controller
         });
         foreach( $scratchAndWins as $key => $scratchAndWinOne)
         {
-            $scratchAndWinOne['total_quantity'] = $scratchAndWinOne->sum('pivot.quantity');
-            $scratchAndWinOne['total_money'] = $this->sumForEachItems($scratchAndWinOne);
-            $scratchAndWinOne['total_money_earned'] = $scratchAndWinOne['total_money'] * \Config::get('scratchAndWinApp.guadagno');
+            $stats[$key]['total_quantity'] = $scratchAndWinOne->sum('pivot.quantity');
+            $stats[$key]['total_money'] = $this->sumForEachItems($scratchAndWinOne);
+            $stats[$key]['total_money_earned'] = $stats[$key]['total_money'] * \Config::get('scratchAndWinApp.guadagno');
         }
-        $scratchAndWins = $scratchAndWins->toArray();
         
-        uksort($scratchAndWins ,function($first_date,$second_date){
+        uksort($stats ,function($first_date,$second_date){
             return $this->orderByTime($first_date,$second_date);
         });
-        return $scratchAndWins;
+        return $stats;
     }
 
 
@@ -228,7 +224,6 @@ class ScratchAndWinTobaccoShopController extends Controller
      */
     public function dayChoosenByUser($tobaccoShop, Request $request)
     { 
-        ini_set('memory_limit', '4095M'); // we have a lot of data to process, so we expand the memory limit
         $request->validate([
             'groupBy' => [
                 Rule::in(['d', 'W','m']),
@@ -247,18 +242,19 @@ class ScratchAndWinTobaccoShopController extends Controller
                                                                                if($groupBy == 'd') return $dateFormatted . '/' . $scratchAndWin->pivot->created_at->format('m/Y') ;
                                                                                if($groupBy == 'm') return $dateFormatted . '/' . $scratchAndWin->pivot->created_at->format('Y') ;
                                                                             });
+
+        $stast = [];
         foreach( $scratchAndWins as $key => $scratchAndWinOne)
         {
-            $scratchAndWinOne['total_quantity'] = $scratchAndWinOne->sum('pivot.quantity');
-            $scratchAndWinOne['total_money'] = $this->sumForEachItems($scratchAndWinOne);
-            $scratchAndWinOne['total_money_earned'] = $scratchAndWinOne['total_money'] * \Config::get('scratchAndWinApp.guadagno');
+            $stats[$key]['total_quantity'] = $scratchAndWinOne->sum('pivot.quantity');
+            $stats[$key]['total_money'] = $this->sumForEachItems($scratchAndWinOne);
+            $stats[$key]['total_money_earned'] = $stats[$key]['total_money'] * \Config::get('scratchAndWinApp.guadagno');
         }
-        $ordered = $scratchAndWins->toArray();
-        uksort($ordered ,function($first_date,$second_date)
+        uksort($stats ,function($first_date,$second_date)
         {
             return $this->orderByTime(\Str::of($first_date)->explode(' ')[0],\Str::of($second_date)->explode(' ')[0]);
         });
-        return $ordered;
+        return $stats;
              
         
         

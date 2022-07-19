@@ -41,4 +41,17 @@
   top: 0;
   width: 70%;
 }
+
+.link_items_in_selling {
+  color: #fdc500;
+}
+
+.space_ok {
+  white-space: pre;
+}
+
+.new_package_registered {
+  background-color: #fdc500 !important;
+  color: #000000 !important;
+}
 /*# sourceMappingURL=magazzino.css.map */
