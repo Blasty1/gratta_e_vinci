@@ -1,9 +1,11 @@
 <template>
      <div class="p-0 my-2 mx-0 row row_submit color_placeholder_white">
+                    <link rel="stylesheet" href="/css/main/magazzino.css">
+
       <div class="col-12 pb-2" :class="{'color_placeholder_red' : token.error , 'color_placeholder_white' : true}">
-          <input ref="tokenInput" type="text" :class="{'form-control w-100' : true, 'is-invalid' : token.error }" v-model="token.value"  :placeholder="token.error || 'Spara un qualsiasi biglietto del pacco' " required autofocus>
+          <input ref="tokenInput" type="text" :class="{'form-control w-100' : true, 'is-invalid' : token.error, 'is-valid' : correct }" v-model="token.value"  :placeholder="token.error || 'Spara un qualsiasi biglietto del pacco' " required autofocus>
     </div>
-      <div class="col-12"><button class="w-100" @click.prevent="submitData()">Inserisci in Magazzino</button></div>
+      <div class="col-12"><button :class="{'w-100' : true, 'new_package_registered' : correct}" @click.prevent="submitData()"><span class="space_ok">{{ correct ? 'Pacco Registrato: ' + pacco_registrato.nome + '\n Codice : '  + pacco_registrato.tokenPackage :  "Inserisci in Magazzino" }}</span></button></div>
   </div>
   
 </template>
@@ -17,6 +19,12 @@ export default {
                 value : '',
                 error : false
             },
+            pacco_registrato :
+            {
+                nome : '',
+                tokenPackage : ''
+            },
+            correct : false,
             dataToSubmit : ['token']
         }
     },
@@ -27,11 +35,17 @@ export default {
 
     },
     methods : {
-          submitDataFrontEnd()
+          submitDataFrontEnd(response)
         {
             this.token.value = ""
-            
             this.$nextTick(() => this.$refs.tokenInput.focus()) 
+            this.correct = true;
+
+            this.pacco_registrato.nome = response.name
+            this.pacco_registrato.tokenPackage = response.pivot.tokenPackage
+
+            setTimeout(() => this.correct = false, 8000)
+
 
         },
         handleError(errors)
