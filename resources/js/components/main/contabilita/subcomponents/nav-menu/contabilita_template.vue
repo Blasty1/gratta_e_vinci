@@ -1,6 +1,5 @@
 <template>
     <table class="table" id="contabilita_table">
-              <link rel="stylesheet" href="/css/main/line_chart.css">
         <thead>
             <tr>
                 <th scope="col">GV Nome</th>
@@ -67,7 +66,7 @@
                     <div class="modal-content chart_modal">
                         <div class="modal-header">
                             <h5 class="modal-title" id="title_nav">
-                                Grafico
+                                Andamento Guadagno
                             </h5>
                             <button
                                 type="button"
@@ -79,7 +78,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                          <line-chart></line-chart>
+                          <line-chart :dateX="Object.keys(scratchAndWinsSold)" :dateY="Object.entries(this.scratchAndWinsSold).map(function(item){return item[1].total_money_earned})" ></line-chart>
 
                         </div>
                     </div>
@@ -102,7 +101,8 @@ export default {
     watch: {
         scratch_and_wins_sold_api: function() {
             this.scratchAndWinsSold = this.scratch_and_wins_sold_api;
-        }
+
+        },
     },
     methods: {
         getScratchAndWinsSold() {
