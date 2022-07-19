@@ -1,5 +1,7 @@
 <template>
        <table class="table width_100" id="contabilita_table">
+                    <link rel="stylesheet" href="/css/main/magazzino.css">
+
   <thead>
     <tr>
       <th scope="col">GV Nome</th>
@@ -13,8 +15,8 @@
   <tbody ref="table">
     <tr v-for="(scratchAndWin, key) in packagesInSelling" :key="key">
       <td>{{ scratchAndWin.name }}</td>
-      <td><a tabindex="0" class="" role="button"  data-toggle="popover" data-trigger="focus" data-placement="top" title="Numeri Biglietti Rimanenti" :data-content="Object.values(scratchAndWin.numbersOfPackageNotSold).join(' - ')">{{scratchAndWin.tokenPackage}}</a></td>
-      <td>{{  Math.abs( scratchAndWin.itemsInSelling)  }}</td>
+      <td>{{scratchAndWin.tokenPackage}}</td>
+      <td><a tabindex="0" class="" role="button"  data-toggle="popover" data-trigger="focus" data-placement="top" title="Numeri Biglietti Rimanenti" :data-content="Object.values(scratchAndWin.numbersOfPackageNotSold).join(' - ')"> <span class="link_items_in_selling">{{  Math.abs( scratchAndWin.itemsInSelling)  }}</span></a></td>
       <td>{{ moment(scratchAndWin.created_at).format('D/M/Y') }}</td>
       <td @click="completePackage(scratchAndWin.tokenPackage,key)" v-if="$parent.$parent.user_logged.id === $parent.$parent.tobacco_shop.user_id" role="button">&#10003</td>
       <td @click="deletePackage(scratchAndWin.idPackage, key)" v-if="$parent.$parent.user_logged.id === $parent.$parent.tobacco_shop.user_id" role="button">&times</td>
