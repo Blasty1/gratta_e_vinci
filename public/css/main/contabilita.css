@@ -109,7 +109,7 @@ html, body {
   color: #000000;
 }
 
-.row_submit .col-4, .row_submit .col-2, .row_submit .col-6 {
+.row_submit .col-4, .row_submit .col-2, .row_submit .col-6, .row_submit .col-5 {
   padding: 0.2rem;
 }
 
@@ -193,6 +193,20 @@ html, body {
 
 .changeMaxHeight tbody {
   max-height: 50vh !important;
+}
+
+.chart_modal {
+  background-color: #00509d;
+  color: #000000;
+}
+
+.chart_modal button {
+  border-color: transparent;
+  color: #FFFFFF;
+}
+
+.chart_modal button:hover {
+  color: #FFFFFF;
 }
 
 @media (max-width: 767.98px) {
