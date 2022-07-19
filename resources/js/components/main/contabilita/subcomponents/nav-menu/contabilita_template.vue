@@ -78,7 +78,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                          <line-chart :dateX="Object.keys(scratchAndWinsSold)" :dateY="Object.entries(this.scratchAndWinsSold).map(function(item){return item[1].total_money_earned})" ></line-chart>
+                          <line-chart :dateX="Object.keys(scratchAndWinsSold)" :dateY="Object.entries(this.scratchAndWinsSold).map(function(item){return Math.abs(item[1]['total_money_earned'])})" ></line-chart>
 
                         </div>
                     </div>
