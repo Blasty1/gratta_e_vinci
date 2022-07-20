@@ -61,7 +61,7 @@ class RegisteredUserController extends Controller
                     'user_id' => $user->id,
                     'tobaccoShop_id' => $tokenFound->tobaccoShop_id
                 ]);
-                $tokenFound->delete()
+                $tokenFound->delete();
 
             }
         }
