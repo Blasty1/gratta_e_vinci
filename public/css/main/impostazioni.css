@@ -95,6 +95,11 @@ html, body {
   color: #000000;
 }
 
+.date_updated {
+  background-color: #38c172 !important;
+  color: #000000 !important;
+}
+
 @media (max-width: 770.98px) and (max-height: 900px) {
   .fixed-top {
     top: 2%;

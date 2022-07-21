@@ -134,7 +134,7 @@
       </div>
     </div>
    <div class="col-12" id="buttonGoogleDiv">
-        <button class="btn btn-primary buttonSubmit w-100" type="submit" @click.prevent="submitData()">Modifica</button>
+        <button :class="{'btn btn-primary buttonSubmit w-100' : true, 'date_updated' : updated}" type="submit"  @click.prevent="submitData()">{{ updated ? 'Dati Salvati' : 'Modifica' }} </button>
     </div>
   </div>
 </template>
@@ -162,7 +162,8 @@ export default {
                 value : this.user.street_address.split(" ")[0],
                 error : false
             },
-            dataToSubmit : ['email','name','surname','street_address']
+            dataToSubmit : ['email','name','surname','street_address'],
+            updated : false,
 
         }
     },
@@ -179,12 +180,18 @@ export default {
             if( this.thereAreErrors(this.dataToSubmit) ) return false
             return true
         },
+        submitResponseFrontEnd()
+        {
+            this.updated = true;
+
+            setTimeout(() => this.updated = false,5000)
+        },
         submitData()
         {
             if (!this.canSubmitData() ) return 
             axios
-                .post('/api/user/update',{...this.getDatasFormatted(this.dataToSubmit)})
-                .then(response => (window.open('/dashboard','_self')))
+                .put('/api/user/update',{...this.getDatasFormatted(this.dataToSubmit)})
+                .then(response => (this.submitResponseFrontEnd()))
                 .catch(errors => this.getErrorsFromBackEnd(errors.response.data, this))
         }
     }

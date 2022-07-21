@@ -74,6 +74,11 @@ html , body {
         }
     }
 }
+.date_updated
+{
+    background-color: $green !important;
+    color : $black !important; 
+}
 @media  (max-width: 770.98px) and (max-height : 900px) { 
     .fixed-top {
         top :2%;

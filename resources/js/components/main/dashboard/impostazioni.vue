@@ -4,6 +4,10 @@
             <h2 class="title">Dati</h2>
             <dati :user = user></dati>
         </div>
+        <div id="" class="mt-2">
+            <h2 class="title">Dati</h2>
+            <dati :user = user></dati>
+        </div>
     </div>
 </template>
 
