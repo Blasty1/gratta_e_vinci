@@ -43,7 +43,7 @@ class Registered extends Notification
                     ->greeting('Benvenuto ' . $notifiable->name)
                     ->line('Ora fai parte della nostra Community, comincia subito a scoprire la nostra applicazione')
                     ->action('Contabilizza', url('/dashboard'))
-                    ->line('Condividi con i tuoi colleghi!');
+                    ->line('Condividi con altri tuoi colleghi!');
     }
 
     /**

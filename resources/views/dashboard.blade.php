@@ -4,7 +4,7 @@
      <nav id="navbar" class="fixed-top">
             <ul class="nav justify-content-center mt-2" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link active "  href="#home">{{ $user->name }}</a>
+                    <a class="nav-link active "  href="/dashboard">{{ $user->name }}</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link"  href="/impostazioni" role="tab">Impostazioni</a>

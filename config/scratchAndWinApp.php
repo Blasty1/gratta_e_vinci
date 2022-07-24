@@ -195,7 +195,8 @@ return [
     'valore_pacco' => 300,
     'valore_pacco_1_2_3' => 150, //gratta e vinci che costano 1,2 o 3 euro e ogni stecca non vale 300 bensi 150
     'MAX_DAY_TO_SHOW' => 50, //max days to show in contabilita quotidiana
-    'MAX_MONTH_TO_SHOW' => 10 //max months to show in contabilita mensile
+    'MAX_MONTH_TO_SHOW' => 10, //max months to show in contabilita mensile
+    'MAX_MINUTES_TO_DELETE_TOBACCOSHOP' => 30, // max minutes to confirm through email the elimination of tobacco shop 
 ];
 
 

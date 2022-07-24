@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\DeleteTobaccoShopController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ScratchAndWinTobaccoShopController;
 use App\Http\Controllers\TobaccoShopController;
+use App\Http\Controllers\UserController;
 use App\Models\TobaccoShop;
 use Facade\Ignition\Support\Packagist\Package;
 use Illuminate\Http\Request;
@@ -43,3 +45,5 @@ Route::get('/packages/{tobaccoShop}/inselling',[PackageController::class,'show']
 Route::get('/packages/{tobaccoShop}/sold',[PackageController::class,'showPackageSold'])->middleware(['auth:sanctum', 'owner']);
 Route::delete('/package/{tobaccoShop}/{package}',[PackageController::class,'destroy'])->middleware(['auth:sanctum','owner']);
 Route::get('/packages/{tobaccoShop}/{package}/complete',[PackageController::class,'update'])->middleware(['auth:sanctum','owner']);
+Route::put('/user/update',[UserController::class,'update'])->middleware('auth:sanctum');
+Route::get('/{tobaccoShop}/deleteTobaccoShop/sendEmail',[DeleteTobaccoShopController::class,'store'])->middleware(['auth:sanctum','owner']);
