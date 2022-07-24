@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DeleteTobaccoShopController;
 use App\Http\Controllers\LoginGoogleController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TobaccoShopController;
@@ -28,4 +29,5 @@ Route::get('/impostazioni',[SettingsController::class,'index'])->name('impostazi
 
 Route::get('/contabilizza/{tobaccoShop}',[TobaccoShopController::class,'show'])->middleware(['ownerOrEmployee','auth']);
 Route::get('/user/logout',[LoginGoogleController::class,'closeSession']);
+Route::get('/{tobaccoShop}/{token}/deleteTobaccoShop',[DeleteTobaccoShopController::class,'destroy']);
 require __DIR__.'/auth.php';

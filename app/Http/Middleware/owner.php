@@ -17,7 +17,7 @@ class owner
      */
     public function handle(Request $request, Closure $next)
     {
-        if( TobaccoShop::find($request->tobaccoShop)->owner->id !== $request->user()->id) return response()->json('Non puoi effettuare questa modifica',404);
+        if( TobaccoShop::find($request->tobaccoShop)->owner->id !== $request->user()->id) return response()->json('Non puoi effettuare questa modifica',403);
         return $next($request);
     }
 }

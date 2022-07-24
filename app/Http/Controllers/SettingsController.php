@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
@@ -18,7 +19,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        return view('impostazioni', [ 'user' => \Auth::user()]);
+        return view('impostazioni', [ 'user' => User::with('tobaccoShops')->find(\Auth::id())]);
     }
 
     /**
