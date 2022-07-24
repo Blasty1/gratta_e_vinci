@@ -45,7 +45,7 @@ class DeleteTobaccoShopController extends Controller
         $result = DeleteTobaccoShop::insert([
             'tobaccoShop_id' => $tobaccoShop,
             'token' => Hash::make($token),
-            'expires_at' => Carbon::now()->addSeconds(\Config::get('scratchAndWinApp.MAX_MINUTES_TO_DELETE_TOBACCOSHOP') * 60)
+            'expires_at' => Carbon::now()->addSeconds(\Config::get('scratchAndWinApp.MAX_MINUTES_TO_DELETE_TOBACCOSHOP') * 60),
         ]);
         $user->notify(new sendEmailToDeleteTobaccoShop(TobaccoShop::find($tobaccoShop),$token));
         
@@ -94,18 +94,20 @@ class DeleteTobaccoShopController extends Controller
      */
     public function destroy(int $tobaccoShop, string $token)
     {
-        $richiesta = DeleteTobaccoShop::where('tobaccoShop_id',$tobaccoShop)->first();
+        $richiesta = DeleteTobaccoShop::where('tobaccoShop_id',$tobaccoShop)->where('deleted',false)->first();
 
         //se il token corrisponde nel database , inoltre la corrispondenza deve essere giusta e il token risulta essere ancora valido 
         if($richiesta && Hash::check($token,$richiesta->token) && Carbon::now()->diffInMinutes($richiesta->expires_at) <= \Config::get("scratchAndWinApp.MAX_MINUTES_TO_DELETE_TOBACCOSHOP"))
         {
             TobaccoShop::find($tobaccoShop)->first()->delete();
+            $richiesta->deleted = true;
+            $richiesta->save();
             $message = "Operazione eseguita correttamente";
         }else
         {
             $message = 'Errore, token errato oppure scaduto';
         }
-        
+
         return view('response', [ 'message' => $message]);
 
     }

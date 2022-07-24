@@ -15,8 +15,9 @@ class DeleteTobaccoShop extends Model
      * @var string[]
      */
     protected $fillable = [
-        'tobaccoShop_id','expires_at'
+        'tobaccoShop_id','expires_at','deleted'
     ];
+    public $timestamps = false;
 
     /**
      * The attributes that should be hidden for serialization.

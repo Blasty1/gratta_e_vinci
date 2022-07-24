@@ -20,6 +20,7 @@ class DeleteTobaccoShop extends Migration
             $table->foreignId('tobaccoShop_id')->nullable();
             $table->foreign('tobaccoShop_id')->references('id')->on('tobacco_shops')->nullOnDelete();
             $table->timestamp('expires_at');
+            $table->boolean("deleted")->default(false);
 
         });
     }
