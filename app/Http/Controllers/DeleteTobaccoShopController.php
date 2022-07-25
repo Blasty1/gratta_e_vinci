@@ -95,11 +95,10 @@ class DeleteTobaccoShopController extends Controller
     public function destroy(int $tobaccoShop, string $token)
     {
         $richiesta = DeleteTobaccoShop::where('tobaccoShop_id',$tobaccoShop)->where('deleted',false)->first();
-
         //se il token corrisponde nel database , inoltre la corrispondenza deve essere giusta e il token risulta essere ancora valido 
         if($richiesta && Hash::check($token,$richiesta->token) && Carbon::now()->diffInMinutes($richiesta->expires_at) <= \Config::get("scratchAndWinApp.MAX_MINUTES_TO_DELETE_TOBACCOSHOP"))
         {
-            TobaccoShop::find($tobaccoShop)->first()->delete();
+            TobaccoShop::find($tobaccoShop)->delete();
             $richiesta->deleted = true;
             $richiesta->save();
             $message = "Operazione eseguita correttamente";
