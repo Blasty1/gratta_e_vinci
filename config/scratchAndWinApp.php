@@ -42,7 +42,7 @@ return [
     ],
     [
         'name' => 'Doppia Sfida' ,
-        'token' => '3004',
+        'token' => '3054',
         'prize' => 5
     ],
     [
