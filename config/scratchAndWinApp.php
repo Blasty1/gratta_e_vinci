@@ -112,7 +112,7 @@ return [
     ],
     [
         'name' => 'Sette e mezzo 1',
-        'token' => '3031',
+        'token' => '3051',
         'prize' => 1
     ],
     [
