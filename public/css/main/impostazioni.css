@@ -131,4 +131,11 @@ html, body {
     top: 2%;
   }
 }
+
+@media (max-width: 500px) {
+  #tobaccoShopsToDelete li {
+    display: block;
+    text-align: center;
+  }
+}
 /*# sourceMappingURL=impostazioni.css.map */
