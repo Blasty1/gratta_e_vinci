@@ -159,7 +159,7 @@ export default {
                 error : false
             },
             street_address : {
-                value : this.user.street_address.split(" ")[0],
+                value : this.user.street_address,
                 error : false
             },
             dataToSubmit : ['email','name','surname','street_address'],

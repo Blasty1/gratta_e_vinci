@@ -104,3 +104,14 @@ html , body {
     }
 
 }
+@media  (max-width: 500px){ 
+    #tobaccoShopsToDelete
+    {
+        li
+        {
+            display: block;
+            text-align: center;
+        }
+    }
+
+}

@@ -4,7 +4,7 @@
     <tr>
       <th scope="col">GV Nome</th>
       <th scope="col">Prezzo</th>
-      <th scope="col">Quantità</th>
+      <th scope="col">Numero GV</th>
       <th scope="col">Venduto da</th>
        <th scope="col">Orario</th>
        <th v-if="$parent.user_logged.id === $parent.tobacco_shop.user_id" ></th>
@@ -14,7 +14,7 @@
     <tr v-for="(scratchAndWin, index) in scratchAndWinSold" :key="index"  :class="{ 'itemsExceptFirst' :  index != 0, 'changeBGRow' : index <= newItem.length ? newItem[index] : false }" >
       <td scope="row">{{ scratchAndWin.name}}</td>
       <td>{{ Math.abs( scratchAndWin.prize * scratchAndWin.pivot.quantity) }} &#8364;</td>
-      <td>{{  Math.abs(scratchAndWin.pivot.quantity)  }}</td>
+      <td>{{  scratchAndWin.pivot.numberOfPackage }}</td>
       <td>{{ ( scratchAndWin.user &&  scratchAndWin.user.name ) || 'Gestore' }}</td>
       <td>{{ moment(scratchAndWin.pivot.created_at).format('LT')  }}</td>
       <td @click="deleteScratchAndWinSold(scratchAndWin.pivot.id, index)" v-if="$parent.user_logged.id === $parent.tobacco_shop.user_id" role="button">&times</td>
