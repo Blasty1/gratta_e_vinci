@@ -89,13 +89,7 @@ html , body {
         color: $white ;
     }
 }
-.width_100
-{
-    tbody
-    {
-        max-height: 70vh !important;
-    }
-}
+
 .boxSelezionaDate{
     flex: 1;
     color: #FFFFFF;
@@ -146,24 +140,12 @@ html , body {
             max-height: 54vh;
         }
     }
-    .changeMaxHeight{
-            
-            tbody{
-                max-height: 51vh !important;
-            
-        }
-    }
+   
 }
 @media (max-width: 575.98px) { 
     #main_contabilità{
         height: 82%;
         padding: 0.4em;
     }
-    .changeMaxHeight{
-            
-        tbody{
-            max-height: 47vh !important;
-        
-    }
-}
+
 }

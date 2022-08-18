@@ -1,5 +1,5 @@
 <template>
-       <table class="table width_100" id="contabilita_table">
+       <table class="table" id="contabilita_table">
                     <link rel="stylesheet" href="/css/main/magazzino.css">
 
   <thead>
