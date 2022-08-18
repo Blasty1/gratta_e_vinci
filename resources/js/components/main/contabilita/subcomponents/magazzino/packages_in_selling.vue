@@ -23,9 +23,19 @@
 
     </tr>
   </tbody >
+  <div class="col-12 p-0 my-2 mx-0 row row_submit">
+            <div class="col-12 p-0">
+                <button type="text" class="form-control w-100">
+                    Totale Magazzino : {{ this.getTotalSold() }} &#8364;
+                </button>
+            </div>
+  
+          
+        </div>
  
   
 </table>
+
 </template>
 <script>
 export default {
@@ -60,6 +70,13 @@ export default {
                 .then(response => this.deletePackageFrontEnd(positionInArray))
                 .catch(errors => console.log(errors.data))
 
+        },
+        getTotalSold() {
+            let moneyGot = 0;
+            for (let key in this.packagesInSelling) {
+                moneyGot += Math.abs(this.packagesInSelling[key].total_money);
+            }
+            return moneyGot;
         },
        
     },

@@ -84,12 +84,15 @@ class PackageController extends Controller
                         'numbersOfPackageNotSold' => $numbersAvaiable,
                         'tokenPackage' => $scratchAndWinToken[0]->pivot->tokenPackage, //token identificativo per ottenere il pacco di gv che ci interessa
                         'created_at' => $packageRegistered->pivot->created_at,
+                        'total_money' => $numberOfItemInPackageAvaiable * $scratchAndWinToken[0]->prize, // soldi effettivi per ogni pacco di gv
                         'idPackage' => $packageRegistered->pivot->id //id a livello di programmazione utile per eliminare l'intero pacco se l'utente necessita
                     ];
                 }
             }
         }
-        $keys = array_column($scratchAndWinsInSelling, 'itemsInSelling');
+        $keys = array_column($scratchAndWinsInSelling, 'name');
+
+        //sorted by name
         array_multisort($keys, SORT_ASC, $scratchAndWinsInSelling);
 
         return response()->json($scratchAndWinsInSelling);
