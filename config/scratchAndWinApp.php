@@ -82,7 +82,7 @@ return [
     ],
     [
         'name' => 'Mini Doppia Sfidi' ,
-        'token' => '3006',
+        'token' => '3055',
         'prize' => 2
     ],
     [
