@@ -17,7 +17,7 @@ return [
     ],
     [
         'name' => 'Tutto x Tutto 5' ,
-        'token' => '3010',
+        'token' => '3056',
         'prize' => 5
     ],
     [
@@ -189,6 +189,11 @@ return [
         'name' => 'Il re vincente' ,
         'token' => '3059',
         'prize' => 10
+    ],
+    [
+        'name' => 'Fai 13' ,
+        'token' => '3060',
+        'prize' => 5
     ],
 
     'guadagno' => 0.08,
