@@ -195,6 +195,12 @@ return [
         'token' => '3060',
         'prize' => 5
     ],
+    [
+        'name' => 'Super Numerissimi' ,
+        'token' => '3063',
+        'prize' => 10
+    ],
+    
 
     'guadagno' => 0.08,
     'valore_pacco' => 300,
