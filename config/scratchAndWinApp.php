@@ -22,7 +22,7 @@ return [
     ],
     [
         'name' => 'Turista per sempre' ,
-        'token' => '3023',
+        'token' => '3062',
         'prize' => 5
     ],
     [
