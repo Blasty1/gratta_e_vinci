@@ -200,6 +200,11 @@ return [
         'token' => '3063',
         'prize' => 10
     ],
+    [
+        'name' => 'Un Magico Natale' ,
+        'token' => '3064',
+        'prize' => 3
+    ],
     
 
     'guadagno' => 0.08,
