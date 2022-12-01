@@ -205,6 +205,11 @@ return [
         'token' => '3064',
         'prize' => 3
     ],
+    [
+        'name' => 'Ricco Natale' ,
+        'token' => '3314',
+        'prize' => 10
+    ],
     
 
     'guadagno' => 0.08,
