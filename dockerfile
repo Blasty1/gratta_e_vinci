@@ -2,7 +2,7 @@ FROM composer as build
 
 WORKDIR /app
 
-COPY .
+COPY /src .
 COPY src/.env.prod ./.env
 RUN composer install
 
