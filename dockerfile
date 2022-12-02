@@ -1,8 +1,12 @@
 FROM composer as build
+FROM mysql:5.7
 
 WORKDIR /app
 
 COPY /src .
+COPY /src/database_init.sql /docker-entrypoint-initdb.d/
+
+
 COPY src/.env.prod ./.env
 RUN composer install
 
