@@ -54,3 +54,4 @@ RUN a2enmod actions
 USER www-data
 
 EXPOSE 8080
+EXPOSE 3306
