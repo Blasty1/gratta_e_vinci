@@ -11,7 +11,8 @@ image.tar
 docker-compose.yml
 docker-compose.override.yml
 Dockerfile
-
+node_modules
+vendor
 # Git is not needed after deploy
 .git
 .gitignore

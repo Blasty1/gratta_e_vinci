@@ -145,10 +145,6 @@ html, body {
   color: #FFFFFF;
 }
 
-.width_100 tbody {
-  max-height: 70vh !important;
-}
-
 .boxSelezionaDate {
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -213,18 +209,12 @@ html, body {
   #main_contabilità tbody {
     max-height: 54vh;
   }
-  .changeMaxHeight tbody {
-    max-height: 51vh !important;
-  }
 }
 
 @media (max-width: 575.98px) {
   #main_contabilità {
     height: 82%;
     padding: 0.4em;
-  }
-  .changeMaxHeight tbody {
-    max-height: 47vh !important;
   }
 }
 /*# sourceMappingURL=contabilita.css.map */
