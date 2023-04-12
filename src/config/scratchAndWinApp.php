@@ -12,7 +12,7 @@ return [
     ],
     [
         'name' => 'Tutto x Tutto 10' ,
-        'token' => '3011',
+        'token' => '3057',
         'prize' => 10
     ],
     [
@@ -210,6 +210,27 @@ return [
         'token' => '3314',
         'prize' => 10
     ],
+    [
+        'name' => 'Testa o Croce',
+        'token' => '3069',
+        'prize' => 0.5
+    ],
+    [
+        'name' => 'Anni 70',
+        'token' => '3067',
+        'prize' => 3
+    ],
+    [
+        'name' => 'Vinci in Grande',
+        'token' => '3068',
+        'prize' => 25
+    ],
+    [
+        'name' => 'Oro 24 Carati',
+        'token' => '3066',
+        'prize' => 10
+    ],
+
     
 
     'guadagno' => 0.08,
