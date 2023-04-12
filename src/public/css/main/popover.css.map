@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACUA,UAAU;EACN,WAAW,EAAE,MAAM;EACnB,GAAG,EAAE,6CAA6C;;;ADXtD,AAAA,aAAa,CAAA;EACT,KAAK,ECEA,OAAO,CDFE,UAAU;EACxB,gBAAgB,ECHZ,OAAO,CDGa,UAAU;CACrC;;AACD,AAAA,eAAe,CACf;EACI,KAAK,ECPD,OAAO,CDOE,UAAU;CAC1B",
+    "sources": [
+        "popover.scss",
+        "../_setUpProject.scss"
+    ],
+    "names": [],
+    "file": "popover.css"
+}

@@ -1,0 +1,92 @@
+@import "./../setUpProject";
+#login{
+    width: 70%;
+    height: 80%;
+    margin:auto;
+    border: 5px solid $white;
+    background-color: $blu_dark;
+  border-radius: 5em;
+  position: relative;
+  padding: 2em;
+    input , select{
+        width: 80%;
+        height: 5em;
+        margin: auto;
+        background-color: $blue;
+        $border-radius : 2em;
+        color: $white;
+        &::placeholder{
+            color: $white;
+        }
+    }
+    display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+    
+}
+
+.buttonSubmit{
+    width: 70%;
+    height: 5em;
+    border: 1px solid $white;
+    border-radius: 0.5em;
+    color: $black;
+    background-color: $white;
+    &:hover{
+        background-color: $yellow_dark;
+    }
+
+}
+
+#buttonGoogle{
+    height: 5.5em;
+}
+#buttonLoginDiv{
+    display: flex;
+    justify-content: flecenter-start;
+    align-items: center;
+}
+#buttonGoogleDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#passw_dimenticata{
+    color: $white;
+}
+
+@media (max-width: 575.98px) { 
+
+
+}
+
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 850.98px) { 
+    #login{
+        width: 95%;
+        height: 95%;
+        input, select{
+            width: 100%;
+        }
+        border-radius: 0;
+    }
+    .buttonSubmit{
+        width: 100%;
+    }
+    .margin-auto-small-devices{
+        margin: auto;
+    }
+ }
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {
+
+}
+
+// Large devices (desktops, less than 1200px)
+@media (min-width: 1100.98px) { 
+    
+}
+

@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "Sora";
+  src: url("/fonts/Sora/Sora-VariableFont_wght.ttf");
+}
+
+.popover-body {
+  color: #FFFFFF !important;
+  background-color: #00509d !important;
+}
+
+.popover-header {
+  color: #00509d !important;
+}
+/*# sourceMappingURL=popover.css.map */

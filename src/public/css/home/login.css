@@ -1,0 +1,115 @@
+@font-face {
+  font-family: "Sora";
+  src: url("/fonts/Sora/Sora-VariableFont_wght.ttf");
+}
+
+#login {
+  width: 70%;
+  height: 80%;
+  margin: auto;
+  border: 5px solid #FFFFFF;
+  background-color: #003f88;
+  border-radius: 5em;
+  position: relative;
+  padding: 2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#login input, #login select {
+  width: 80%;
+  height: 5em;
+  margin: auto;
+  background-color: #00509d;
+  color: #FFFFFF;
+}
+
+#login input::-webkit-input-placeholder, #login select::-webkit-input-placeholder {
+  color: #FFFFFF;
+}
+
+#login input:-ms-input-placeholder, #login select:-ms-input-placeholder {
+  color: #FFFFFF;
+}
+
+#login input::-ms-input-placeholder, #login select::-ms-input-placeholder {
+  color: #FFFFFF;
+}
+
+#login input::placeholder, #login select::placeholder {
+  color: #FFFFFF;
+}
+
+.buttonSubmit {
+  width: 70%;
+  height: 5em;
+  border: 1px solid #FFFFFF;
+  border-radius: 0.5em;
+  color: #000000;
+  background-color: #FFFFFF;
+}
+
+.buttonSubmit:hover {
+  background-color: #fdc500;
+}
+
+#buttonGoogle {
+  height: 5.5em;
+}
+
+#buttonLoginDiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: flecenter-start;
+      -ms-flex-pack: flecenter-start;
+          justify-content: flecenter-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#buttonGoogleDiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#passw_dimenticata {
+  color: #FFFFFF;
+}
+
+@media (max-width: 850.98px) {
+  #login {
+    width: 95%;
+    height: 95%;
+    border-radius: 0;
+  }
+  #login input, #login select {
+    width: 100%;
+  }
+  .buttonSubmit {
+    width: 100%;
+  }
+  .margin-auto-small-devices {
+    margin: auto;
+  }
+}
+/*# sourceMappingURL=login.css.map */

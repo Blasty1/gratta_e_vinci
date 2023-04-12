@@ -1,0 +1,16 @@
+@import  "./../setUpProject";
+html,body,#app{
+    background-color: $blu_dark;
+    color: $white;
+    height: 100%;
+    width: 100%;
+}
+.center{
+    display : flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+
+}

@@ -1,0 +1,57 @@
+@font-face {
+  font-family: "Sora";
+  src: url("/fonts/Sora/Sora-VariableFont_wght.ttf");
+}
+
+.divIniziali {
+  color: #FFFFFF;
+  cursor: pointer;
+  letter-spacing: 0;
+}
+
+.divIniziali:hover, .divIniziali:active {
+  letter-spacing: 10px;
+}
+
+.divIniziali:after, .divIniziali:before {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  border: 1px solid rgba(255, 255, 255, 0);
+  bottom: 0px;
+  content: " ";
+  display: block;
+  margin: 2rem auto;
+  position: relative;
+  -webkit-transition: all 280ms ease-in-out;
+  transition: all 280ms ease-in-out;
+  width: 0;
+}
+
+.divIniziali:hover:after, .divIniziali:hover:before {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  border-color: #fff;
+  -webkit-transition: width 350ms ease-in-out;
+  transition: width 350ms ease-in-out;
+  width: 70%;
+}
+
+.divIniziali:hover:before {
+  bottom: auto;
+  top: 0;
+  width: 70%;
+}
+
+.link_items_in_selling {
+  color: #fdc500;
+}
+
+.space_ok {
+  white-space: pre;
+}
+
+.new_package_registered {
+  background-color: #fdc500 !important;
+  color: #000000 !important;
+}
+/*# sourceMappingURL=magazzino.css.map */
