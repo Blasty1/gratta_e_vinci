@@ -211,11 +211,6 @@ return [
         'prize' => 10
     ],
     [
-        'name' => 'Testa o Croce',
-        'token' => '3069',
-        'prize' => 0.5
-    ],
-    [
         'name' => 'Anni 70',
         'token' => '3067',
         'prize' => 3
