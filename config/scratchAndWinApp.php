@@ -225,6 +225,11 @@ return [
         'token' => '3066',
         'prize' => 10
     ],
+    [
+        'name' => 'La Star',
+        'token' => '3070',
+        'prize' => 5
+    ],
 
     
 
